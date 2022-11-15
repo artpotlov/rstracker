@@ -13,12 +13,16 @@ export interface ITokenData {
   id: string;
   login: string;
 }
-
 export type TUser = {
   _id: string;
   name: string;
   login: string;
   password: string;
+};
+
+export type TResponse<S, E> = {
+  statusResponse: 'success' | 'error';
+  data: S | E;
 };
 
 export type TErrorResponse = {
@@ -29,6 +33,7 @@ export type TErrorResponse = {
 export type TUserSuccess = Omit<TUser, 'password'>;
 
 export type TUserRequest = {
+  authToken: string;
   userId: string;
 };
 
