@@ -1,4 +1,4 @@
-import axios, { AxiosRequestConfig } from 'axios';
+import axios from 'axios';
 import {
   TErrorResponse,
   TResponse,
@@ -6,17 +6,8 @@ import {
   TUserSuccess,
   TUserUpdateRequest,
 } from '../types/types';
-import { BASE_URL } from '../shared/consts';
 import { handleError } from './handleError';
-
-const defaultConfig = (authToken: string): AxiosRequestConfig => {
-  return {
-    baseURL: BASE_URL,
-    headers: {
-      Authorization: `Bearer ${authToken}`,
-    },
-  };
-};
+import { defaultConfig } from './defaultConfig';
 
 export const getAllUsers = async ({
   authToken,
