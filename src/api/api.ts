@@ -1,25 +1,25 @@
-import axios from 'axios';
-import {
-  TErrorResponse,
-  TResponse,
-  TUserRequest,
-  TUserSuccess,
-  TUserUpdateRequest,
-} from '../types/types';
-import { BASE_URL } from '../shared/consts';
-import { handleError } from './handleError';
+import axios, {AxiosRequestConfig} from 'axios';
+import {TErrorResponse, TResponse, TUserRequest, TUserSuccess, TUserUpdateRequest,} from '../types/types';
+import {BASE_URL} from '../shared/consts';
+import {handleError} from './handleError';
+
+const defaultConfig = (authToken: string): AxiosRequestConfig => {
+  return {
+    baseURL: BASE_URL,
+    headers: {
+      Authorization: `Bearer ${authToken}`,
+    },
+  }
+}
 
 export const getAllUsers = async ({
   authToken,
 }: Pick<TUserRequest, 'authToken'>): Promise<TResponse<TUserSuccess[], TErrorResponse>> => {
   try {
     const response = await axios({
+      ...defaultConfig(authToken),
       method: 'get',
-      baseURL: BASE_URL,
       url: '/users',
-      headers: {
-        Authorization: `Bearer ${authToken}`,
-      },
     });
 
     return {
@@ -40,12 +40,9 @@ export const getUserById = async ({
 }: TUserRequest): Promise<TResponse<TUserSuccess, TErrorResponse>> => {
   try {
     const response = await axios({
+      ...defaultConfig(authToken),
       method: 'get',
-      baseURL: BASE_URL,
       url: `/users/${userId}`,
-      headers: {
-        Authorization: `Bearer ${authToken}`,
-      },
     });
 
     return {
@@ -67,12 +64,9 @@ export const updateUserById = async ({
 }: TUserUpdateRequest): Promise<TResponse<TUserSuccess, TErrorResponse>> => {
   try {
     const response = await axios({
+      ...defaultConfig(authToken),
       method: 'put',
-      baseURL: BASE_URL,
       url: `/users/${userId}`,
-      headers: {
-        Authorization: `Bearer ${authToken}`,
-      },
       data: userData,
     });
 
@@ -94,12 +88,9 @@ export const deleteUserById = async ({
 }: TUserRequest): Promise<TResponse<TUserSuccess, TErrorResponse>> => {
   try {
     const response = await axios({
+      ...defaultConfig(authToken),
       method: 'delete',
-      baseURL: BASE_URL,
       url: `/users/${userId}`,
-      headers: {
-        Authorization: `Bearer ${authToken}`,
-      },
     });
 
     return {
