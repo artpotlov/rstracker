@@ -1,7 +1,13 @@
-import axios, {AxiosRequestConfig} from 'axios';
-import {TErrorResponse, TResponse, TUserRequest, TUserSuccess, TUserUpdateRequest,} from '../types/types';
-import {BASE_URL} from '../shared/consts';
-import {handleError} from './handleError';
+import axios, { AxiosRequestConfig } from 'axios';
+import {
+  TErrorResponse,
+  TResponse,
+  TUserRequest,
+  TUserSuccess,
+  TUserUpdateRequest,
+} from '../types/types';
+import { BASE_URL } from '../shared/consts';
+import { handleError } from './handleError';
 
 const defaultConfig = (authToken: string): AxiosRequestConfig => {
   return {
@@ -9,8 +15,8 @@ const defaultConfig = (authToken: string): AxiosRequestConfig => {
     headers: {
       Authorization: `Bearer ${authToken}`,
     },
-  }
-}
+  };
+};
 
 export const getAllUsers = async ({
   authToken,
