@@ -2,20 +2,19 @@ import { getLSData, setLSData } from './local-storage';
 
 import { IUserData, ITokenData } from '../types/types';
 
-function getJWTPayloadData(token: string) {
+const getJWTPayloadData = (token: string) => {
   const payloadStr = token.split('.')[1];
   const decodedPayload: ITokenData = JSON.parse(window.atob(payloadStr));
 
-  Object.defineProperty(decodedPayload, 'isExpired', {
-    value: () => {
+  return {
+    ...decodedPayload,
+    isExpired: () => {
       return decodedPayload.exp * 1000 < Date.now();
     },
-  });
+  };
+};
 
-  return decodedPayload;
-}
-
-export function checkToken() {
+export const checkToken = () => {
   const userData = getLSData<IUserData>('userData');
 
   if (!userData) {
@@ -28,4 +27,4 @@ export function checkToken() {
   }
 
   return true;
-}
+};

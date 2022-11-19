@@ -9,5 +9,4 @@ export interface ITokenData {
   iat: number;
   id: string;
   login: string;
-  isExpired(): boolean;
 }
