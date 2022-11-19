@@ -13,6 +13,7 @@ export interface ITokenData {
   id: string;
   login: string;
 }
+
 export type TUser = {
   _id: string;
   name: string;
