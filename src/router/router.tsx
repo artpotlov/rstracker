@@ -5,9 +5,17 @@ import { HomePage } from 'pages/HomePage';
 import { BoardPage } from 'pages/BoardPage';
 import { ErrorPage } from 'pages/ErrorPage';
 
+export enum pathRoutes {
+  welcome = '/',
+  board = 'board',
+  auth = 'auth',
+  registration = 'registration',
+  errorPath = '404',
+}
+
 const routes = [
   {
-    path: '/',
+    path: pathRoutes.welcome,
     element: <App />,
     children: [
       {
@@ -15,11 +23,11 @@ const routes = [
         element: <WelcomePage />,
       },
       {
-        path: 'board',
+        path: pathRoutes.board,
         element: <HomePage />,
       },
       {
-        path: 'board/:id',
+        path: `${pathRoutes.board}/:id`,
         element: <BoardPage />,
       },
     ],
