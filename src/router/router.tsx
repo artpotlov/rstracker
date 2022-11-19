@@ -19,10 +19,6 @@ const routes = [
         element: <HomePage />,
       },
       {
-        path: 'board',
-        element: <HomePage />,
-      },
-      {
         path: 'board/:id',
         element: <BoardPage />,
       },
