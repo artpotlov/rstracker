@@ -29,3 +29,19 @@ export type TUserRequest = {
 };
 
 export type TUserUpdateRequest = Omit<TUser, '_id'> & TUserRequest;
+
+export type TBoardSuccess = {
+  _id: string;
+  title: string;
+  owner: string;
+  users: string[];
+};
+
+export type TBoardRequest = {
+  boardId: string;
+} & Omit<TBoardSuccess, '_id'>;
+
+export type TBoardsSetRequest = {
+  ids: string[];
+  userId: string;
+};
