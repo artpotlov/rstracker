@@ -6,7 +6,7 @@ interface Props {
   children: JSX.Element;
 }
 
-export function RequireAuthorization({ children }: Props): JSX.Element {
+export function PageGuard({ children }: Props): JSX.Element {
   const location = useLocation();
 
   if (!checkToken()) {
