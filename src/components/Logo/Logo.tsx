@@ -6,7 +6,7 @@ export const Logo = () => {
   return (
     <Link to={pathRoutes.welcome}>
       <LogoTypography variant="h1" noWrap>
-        rss tracker
+        RssTrack
       </LogoTypography>
     </Link>
   );
