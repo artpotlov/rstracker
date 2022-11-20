@@ -1,4 +1,5 @@
 import { useLocation, Navigate } from 'react-router-dom';
+import { pathRoutes } from 'router/router';
 
 import { checkToken } from '../utils/checkToken';
 
@@ -10,7 +11,7 @@ export function PageGuard({ children }: Props): JSX.Element {
   const location = useLocation();
 
   if (!checkToken()) {
-    return <Navigate to="/" state={{ from: location }} />;
+    return <Navigate to={pathRoutes.welcome} state={{ from: location }} />;
   }
 
   return children;
