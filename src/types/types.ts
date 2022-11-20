@@ -1,7 +1,10 @@
-export interface IUserData {
+export interface IToken {
+  token: string;
+}
+
+export interface IUserData extends IToken {
   userId: string;
   login: string;
-  token: string;
 }
 
 export interface ITokenData {
@@ -45,3 +48,7 @@ export type TBoardsSetRequest = {
   ids: string[];
   userId: string;
 };
+
+export type TUserCreate = Omit<TUser, '_id'>;
+
+export type TUserAuth = Omit<TUser, '_id' | 'name'>;
