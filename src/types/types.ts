@@ -65,8 +65,8 @@ export type TColumnRequest = {
 } & Omit<TColumnSuccess, '_id'>;
 
 export type TColumnsSetRequest = {
-  ids: string[];
-  userId: string;
+  ids?: string[];
+  userId?: string;
 };
 
 export type TColumnsSetUpdateRequest = Pick<TColumnSuccess, '_id' | 'order'>[];

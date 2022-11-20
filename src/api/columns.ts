@@ -6,6 +6,7 @@ import {
   TColumnSuccess,
 } from '../types/types';
 import { instanceAxios } from './instanceAxios';
+import { AxiosRequestConfig } from 'axios';
 
 export const getAllColumns = ({ boardId }: Pick<TColumnRequest, 'boardId'>) => {
   return instanceAxios().get<TColumnSuccess[]>(`/boards/${boardId}/columns`);
@@ -34,12 +35,21 @@ export const deleteColumnById = ({
 };
 
 export const getColumnsSet = ({ ids, userId }: TColumnsSetRequest) => {
-  return instanceAxios().get<TColumnSuccess[]>('/columnsSet', {
-    params: {
+  const config: AxiosRequestConfig = {};
+
+  if (ids && ids.length > 0) {
+    config.params = {
       ids: ids.join(','),
+    };
+  }
+
+  if (userId) {
+    config.params = {
       userId,
-    },
-  });
+    };
+  }
+
+  return instanceAxios().get<TColumnSuccess[]>('/columnsSet', config);
 };
 
 export const updateOrdersInColumns = (columns: TColumnsSetUpdateRequest) => {
