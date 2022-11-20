@@ -22,11 +22,8 @@ const routes = [
         path: 'board/:id',
         element: <BoardPage />,
       },
-      {
-        path: '*',
-        element: <ErrorPage />,
-      },
     ],
+    errorElement: <ErrorPage />,
   },
 ];
 
