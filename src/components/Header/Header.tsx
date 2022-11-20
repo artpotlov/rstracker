@@ -13,7 +13,7 @@ import { useTranslation } from 'react-i18next';
 export const Header = () => {
   const { t } = useTranslation();
   //todo replace auth into redux
-  const [isAuth, setAuth] = useState(true);
+  const [isAuth, setAuth] = useState(false);
   const navigate = useNavigate();
   const { pathname } = useLocation();
   const isBoardPage = new RegExp(`^/${pathRoutes.boards}`).test(pathname);
@@ -46,7 +46,7 @@ export const Header = () => {
               <IconButtonBase aria-label="add board" icon={<GroupObjectsNew size="24" />} />
             </>
           ) : (
-            <Link to={isAuth ? pathRoutes.boards : pathRoutes.auth}>
+            <Link to={isAuth ? pathRoutes.boards : pathRoutes.sign}>
               <Button colorScheme="blue" size="sm">
                 {isAuth ? t('header.boards') : t('header.auth')}
               </Button>
