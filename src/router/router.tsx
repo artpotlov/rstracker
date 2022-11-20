@@ -7,7 +7,7 @@ import { ErrorPage } from 'pages/ErrorPage';
 
 export enum pathRoutes {
   welcome = '/',
-  board = 'board',
+  boards = 'boards',
   auth = 'auth',
   registration = 'registration',
   errorPath = '404',
@@ -23,11 +23,11 @@ const routes = [
         element: <WelcomePage />,
       },
       {
-        path: pathRoutes.board,
+        path: pathRoutes.boards,
         element: <HomePage />,
       },
       {
-        path: `${pathRoutes.board}/:id`,
+        path: `${pathRoutes.boards}/:id`,
         element: <BoardPage />,
       },
     ],

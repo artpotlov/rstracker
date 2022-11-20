@@ -13,7 +13,7 @@ export const Header = () => {
   const [isAuth, setAuth] = useState(true);
   const navigate = useNavigate();
   const { pathname } = useLocation();
-  const isBoardPage = new RegExp(`^/${pathRoutes.board}`).test(pathname);
+  const isBoardPage = new RegExp(`^/${pathRoutes.boards}`).test(pathname);
 
   const handleLogout = () => {
     setAuth(false);
@@ -47,7 +47,7 @@ export const Header = () => {
                 New board
               </Button>
             ) : (
-              <Link to={pathRoutes.board}>
+              <Link to={pathRoutes.boards}>
                 <Button variant="contained" sx={{ marginRight: '30px' }}>
                   Go to Main Page
                 </Button>
