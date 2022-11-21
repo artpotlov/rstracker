@@ -1,6 +1,10 @@
 import { Box, TextField } from '@mui/material';
 import { LoadingButton } from '@mui/lab';
 import { Controller, useForm } from 'react-hook-form';
+import { selectCreatedUserSign, selectIsLoadingSign } from 'store/sign/sign.selectors';
+import { signUpThunk } from 'store/sign/sign.thunk';
+import { useAppDispatch } from 'hooks/useAppDispatch';
+import { useEffect } from 'react';
 
 type TDataForm = {
   name: string;
@@ -9,19 +13,26 @@ type TDataForm = {
 };
 
 export const SignUpForm = () => {
-  //todo get loading from redux
-  const isLoading = false;
+  const dispatch = useAppDispatch();
+  const isLoading = selectIsLoadingSign();
+  const createdUser = selectCreatedUserSign();
 
   const {
     control,
     handleSubmit,
     formState: { errors },
+    reset,
   } = useForm<TDataForm>();
 
   const onSubmit = (data: TDataForm) => {
-    //todo submit redux
-    console.log(data);
+    dispatch(signUpThunk(data));
   };
+
+  useEffect(() => {
+    if (createdUser) {
+      reset();
+    }
+  }, [createdUser, reset]);
 
   return (
     <Box

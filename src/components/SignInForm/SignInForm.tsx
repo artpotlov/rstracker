@@ -1,6 +1,9 @@
 import { Controller, useForm } from 'react-hook-form';
 import { Box, TextField } from '@mui/material';
 import { LoadingButton } from '@mui/lab';
+import { signInThunk } from 'store/sign/sign.thunk';
+import { useAppDispatch } from 'hooks/useAppDispatch';
+import { selectIsLoadingSign } from 'store/sign/sign.selectors';
 
 type TDataForm = {
   login: string;
@@ -8,8 +11,8 @@ type TDataForm = {
 };
 
 export const SignInForm = () => {
-  //todo get loading from redux
-  const isLoading = false;
+  const dispatch = useAppDispatch();
+  const isLoading = selectIsLoadingSign();
 
   const {
     control,
@@ -18,8 +21,7 @@ export const SignInForm = () => {
   } = useForm<TDataForm>();
 
   const onSubmit = (data: TDataForm) => {
-    //todo submit redux
-    console.log(data);
+    dispatch(signInThunk(data));
   };
 
   return (

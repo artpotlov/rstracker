@@ -1,7 +1,5 @@
-import { useState } from 'react';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { Button, Divider, Flex } from '@chakra-ui/react';
-import { pathRoutes } from 'router/router';
 import { GroupObjectsNew } from '@carbon/icons-react';
 import { RSTrackerLogo } from 'components/Logotype';
 import { LanguageSelect } from 'components/LanguageSelect/LanguageSelect';
@@ -9,18 +7,21 @@ import { UserMenu } from 'components/UserMenu/UserMenu';
 import { Searching } from 'components/Searching/Searching';
 import { IconButtonBase } from 'components/IconButtonBase/IconButtonBase';
 import { useTranslation } from 'react-i18next';
+import { pathRoutes } from 'router/router';
+import { selectAuthUser } from 'store/user/user.selectors';
+import { userActions } from 'store/user/user.slice';
+import { useAppDispatch } from 'hooks/useAppDispatch';
 
 export const Header = () => {
   const { t } = useTranslation();
-  //todo replace auth into redux
-  const [isAuth, setAuth] = useState(false);
-  const navigate = useNavigate();
+  const dispatch = useAppDispatch();
   const { pathname } = useLocation();
   const isBoardPage = new RegExp(`^/${pathRoutes.boards}`).test(pathname);
+  const { logoutUser } = userActions;
+  const authUser = selectAuthUser();
 
   const handleLogout = () => {
-    setAuth(false);
-    navigate(pathRoutes.welcome);
+    dispatch(logoutUser());
   };
 
   return (
@@ -46,13 +47,13 @@ export const Header = () => {
               <IconButtonBase aria-label="add board" icon={<GroupObjectsNew size="24" />} />
             </>
           ) : (
-            <Link to={isAuth ? pathRoutes.boards : pathRoutes.sign}>
+            <Link to={authUser ? pathRoutes.boards : pathRoutes.sign}>
               <Button colorScheme="blue" size="sm">
-                {isAuth ? t('header.boards') : t('header.auth')}
+                {authUser ? t('header.boards') : t('header.auth')}
               </Button>
             </Link>
           )}
-          {isAuth && <UserMenu handleLogout={handleLogout} />}
+          {!!authUser && <UserMenu handleLogout={handleLogout} />}
         </Flex>
       </Flex>
       <Divider />

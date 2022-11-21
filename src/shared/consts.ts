@@ -4,3 +4,7 @@ export const GITHUB_LINKS = {
   tonKristall: 'https://github.com/tonKristall',
   slavaShchipunov: 'https://github.com/Slava-Shchipunov',
 };
+
+export const keysLS = {
+  userData: 'userData',
+};

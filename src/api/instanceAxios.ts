@@ -1,5 +1,5 @@
 import axios, { AxiosRequestConfig } from 'axios';
-import { BASE_URL } from '../shared/consts';
+import { BASE_URL, keysLS } from '../shared/consts';
 import { IUserData } from '../types/types';
 import { getLSData } from '../utils/local-storage';
 
@@ -8,7 +8,7 @@ export const instanceAxios = (defaultConfig?: AxiosRequestConfig) => {
     baseURL: BASE_URL,
   };
 
-  const userData = getLSData<IUserData>('userData');
+  const userData = getLSData<IUserData>(keysLS.userData);
 
   if (userData && 'token' in userData) {
     config.headers = {

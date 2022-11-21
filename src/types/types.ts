@@ -5,6 +5,7 @@ export interface IToken {
 export interface IUserData extends IToken {
   userId: string;
   login: string;
+  tokenExp: number;
 }
 
 export interface ITokenData {

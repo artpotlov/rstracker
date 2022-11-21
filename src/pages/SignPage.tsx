@@ -1,9 +1,12 @@
 import { useEffect, useState } from 'react';
-import { useLocation } from 'react-router-dom';
+import { Navigate, useLocation } from 'react-router-dom';
 import { Box, Container } from '@mui/system';
 import { Tab, Tabs } from '@mui/material';
 import { SignInForm } from 'components/SignInForm/SignInForm';
 import { SignUpForm } from 'components/SignUpForm/SignUpForm';
+import { selectCreatedUserSign } from 'store/sign/sign.selectors';
+import { pathRoutes } from 'router/router';
+import { selectAuthUser } from 'store/user/user.selectors';
 
 type TLocationState = 'signIn' | 'signUp';
 
@@ -14,6 +17,8 @@ export const signTabs = {
 
 export const SignPage = () => {
   const { state } = useLocation();
+  const createdUser = selectCreatedUserSign();
+  const authUser = selectAuthUser();
   const [tab, setTab] = useState(signTabs.signIn.value);
 
   const handleChangeTab = (event: React.SyntheticEvent, newValue: string) => {
@@ -24,6 +29,16 @@ export const SignPage = () => {
     const locationState: TLocationState = state in signTabs ? state : signTabs.signIn.tab;
     setTab(signTabs[locationState].value);
   }, [state]);
+
+  useEffect(() => {
+    if (createdUser) {
+      setTab(signTabs.signIn.value);
+    }
+  }, [createdUser]);
+
+  if (authUser) {
+    return <Navigate to={`/${pathRoutes.boards}`} replace />;
+  }
 
   return (
     <Container sx={{ paddingTop: '50px' }}>
