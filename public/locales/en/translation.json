@@ -1,0 +1,7 @@
+{
+  "components": {
+    "app": {
+      "welcome": "Welcome to the page!"
+    }
+  }
+}
