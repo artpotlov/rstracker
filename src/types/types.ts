@@ -123,3 +123,15 @@ export type TPointUpdateRequest = {
 export type TPointDeleteRequest = {
   pointId: string;
 };
+
+export type TTasksSuccess = {
+  columnId: string;
+  description: string;
+  userId: string;
+  users: string[];
+};
+
+export type TTasksRequest = {
+  boardId: string;
+  columnId: string;
+} /*  & Omit<TBoardSuccess, '_id'> */;
