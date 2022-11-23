@@ -97,3 +97,29 @@ export type TFileUploadRequest = {
 export type TFileDeleteRequest = {
   fileId: string;
 };
+
+export type TPointSuccess = {
+  _id: string;
+  title: string;
+  taskId: string;
+  boardId: string;
+  done: boolean;
+};
+
+export type TPointsGetRequest = {
+  ids?: string[];
+  userId?: string;
+  taskId: string;
+};
+
+export type TPointCreateRequest = Omit<TPointSuccess, '_id'>;
+
+export type TPointsUpdateRequest = Pick<TPointSuccess, '_id' | 'done'>[];
+
+export type TPointUpdateRequest = {
+  pointId: string;
+} & Pick<TPointSuccess, '_id' | 'done'>;
+
+export type TPointDeleteRequest = {
+  pointId: string;
+};
