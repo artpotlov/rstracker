@@ -52,3 +52,23 @@ export type TBoardsSetRequest = {
 export type TUserCreate = Omit<TUser, '_id'>;
 
 export type TUserAuth = Omit<TUser, '_id' | 'name'>;
+
+export type TColumnSuccess = {
+  _id: string;
+  title: string;
+  order: number;
+  boardId: string;
+};
+
+export type TColumnRequest = {
+  columnId: string;
+} & Omit<TColumnSuccess, '_id'>;
+
+export type TColumnsSetRequest = {
+  ids?: string[];
+  userId?: string;
+};
+
+export type TColumnsSetUpdateRequest = Pick<TColumnSuccess, '_id' | 'order'>[];
+
+export type TColumnsSetCreateRequest = Omit<TColumnSuccess, '_id'>[];
