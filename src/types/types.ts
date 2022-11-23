@@ -72,3 +72,28 @@ export type TColumnsSetRequest = {
 export type TColumnsSetUpdateRequest = Pick<TColumnSuccess, '_id' | 'order'>[];
 
 export type TColumnsSetCreateRequest = Omit<TColumnSuccess, '_id'>[];
+
+export type TFileSuccess = {
+  _id: string;
+  name: string;
+  taskId: string;
+  boardId: string;
+  path: string;
+};
+
+export type TFileGetRequest = {
+  ids?: string[];
+  userId?: string;
+  taskId?: string;
+  boardId: string;
+};
+
+export type TFileUploadRequest = {
+  boardId: string;
+  taskId: string;
+  file: FormData;
+};
+
+export type TFileDeleteRequest = {
+  fileId: string;
+};
