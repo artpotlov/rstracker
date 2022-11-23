@@ -125,13 +125,24 @@ export type TPointDeleteRequest = {
 };
 
 export type TTasksSuccess = {
+  _id: string;
+  title: string;
+  order: number;
+  boardId: string;
   columnId: string;
   description: string;
-  userId: string;
+  userId: number;
   users: string[];
 };
 
 export type TTasksRequest = {
-  boardId: string;
-  columnId: string;
-} /*  & Omit<TBoardSuccess, '_id'> */;
+  taskId: string;
+} & Omit<TTasksSuccess, '_id'>;
+
+export type TTasksSetRequest = {
+  ids?: string[];
+  userId?: string;
+  search?: string;
+};
+
+export type TTasksSetUpdateRequest = Pick<TTasksSuccess, '_id' | 'order' | 'columnId'>[];
