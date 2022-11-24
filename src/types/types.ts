@@ -139,6 +139,10 @@ export type TTasksRequest = {
   taskId: string;
 } & Omit<TTasksSuccess, '_id'>;
 
+export type TNewTaskDataRequest = {
+  newTaskData: Omit<TTasksRequest, 'taskId' | 'boardId'>;
+} & Pick<TTasksRequest, 'boardId' | 'columnId' | 'taskId'>;
+
 export type TTasksSetRequest = {
   ids?: string[];
   userId?: string;

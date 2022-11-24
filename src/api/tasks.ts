@@ -1,5 +1,6 @@
 import { instanceAxios } from './instanceAxios';
 import {
+  TNewTaskDataRequest,
   TTasksRequest,
   TTasksSetRequest,
   TTasksSetUpdateRequest,
@@ -35,10 +36,10 @@ export const getTaskById = ({
   );
 };
 
-export const updateTaskById = ({ boardId, columnId, taskId, ...taskData }: TTasksRequest) => {
+export const updateTaskById = ({ boardId, columnId, taskId, newTaskData }: TNewTaskDataRequest) => {
   return instanceAxios().put<TTasksSuccess[]>(
     `/boards/${boardId}/columns/${columnId}/tasks/${taskId}`,
-    taskData
+    newTaskData
   );
 };
 
