@@ -1,7 +1,8 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { IconButton, Menu, MenuButton, MenuItem, MenuList } from '@chakra-ui/react';
 import { ReactComponent as FlagRu } from 'assets/images/header/flag_ru.svg';
 import { ReactComponent as FlagEn } from 'assets/images/header/flag_en.svg';
+import { useTranslation } from 'react-i18next';
 
 const languageItems = [
   {
@@ -20,10 +21,20 @@ type TLanguage = typeof languageItems[0];
 
 export const LanguageSelect = () => {
   const [selectLang, setSelectLang] = useState(languageItems[0]);
+  const { i18n } = useTranslation();
 
   const selectLanguage = (lang: TLanguage) => {
+    i18n.changeLanguage(lang.code);
     setSelectLang(lang);
   };
+
+  useEffect(() => {
+    const currentLang = languageItems.find((lang) => lang.code === i18n.language);
+    if (currentLang) {
+      setSelectLang(currentLang);
+    }
+    // eslint-disable-next-line
+  }, []);
 
   return (
     <Menu>

@@ -10,6 +10,10 @@ i18n
   .init({
     fallbackLng: 'en',
     debug: process.env.NODE_ENV !== 'production',
+    detection: {
+      order: ['queryString', 'cookie'],
+      caches: ['cookie'],
+    },
     interpolation: {
       escapeValue: false,
     },

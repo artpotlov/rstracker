@@ -8,8 +8,10 @@ import { LanguageSelect } from 'components/LanguageSelect/LanguageSelect';
 import { UserMenu } from 'components/UserMenu/UserMenu';
 import { Searching } from 'components/Searching/Searching';
 import { IconButtonBase } from 'components/IconButtonBase/IconButtonBase';
+import { useTranslation } from 'react-i18next';
 
 export const Header = () => {
+  const { t } = useTranslation();
   //todo replace auth into redux
   const [isAuth, setAuth] = useState(true);
   const navigate = useNavigate();
@@ -44,9 +46,9 @@ export const Header = () => {
               <IconButtonBase aria-label="add board" icon={<GroupObjectsNew size="24" />} />
             </>
           ) : (
-            <Link to={pathRoutes.boards}>
+            <Link to={isAuth ? pathRoutes.boards : pathRoutes.auth}>
               <Button colorScheme="blue" size="sm">
-                {isAuth ? 'Boards' : 'Sign in/up'}
+                {isAuth ? t('header.boards') : t('header.auth')}
               </Button>
             </Link>
           )}

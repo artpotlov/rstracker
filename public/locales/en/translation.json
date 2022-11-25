@@ -1,7 +1,12 @@
 {
-  "components": {
-    "app": {
-      "welcome": "Welcome to the page!"
-    }
+  "app": {
+    "welcome": "Welcome to the page!"
+  },
+  "header": {
+    "boards": "Boards",
+    "auth": "Sign in/up",
+    "edit": "Edit",
+    "logout": "Log out",
+    "search": "Search"
   }
 }
