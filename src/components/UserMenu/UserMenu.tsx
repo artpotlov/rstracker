@@ -1,42 +1,20 @@
-import { useState } from 'react';
-import { Divider, IconButton, ListItemIcon, Menu, MenuItem } from '@mui/material';
-import { AccountCircle, Edit, Logout } from '@mui/icons-material';
+import { Avatar, Menu, MenuButton, MenuItem, MenuList } from '@chakra-ui/react';
+import { Edit, Exit } from '@carbon/icons-react';
 
 type TUserMenuProps = {
   handleLogout: () => void;
 };
 
 export const UserMenu = ({ handleLogout }: TUserMenuProps) => {
-  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
-
-  const handleMenu = (event: React.MouseEvent<HTMLElement>) => {
-    setAnchorEl(event.currentTarget);
-  };
-
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
-
   return (
-    <>
-      <IconButton size="large" onClick={handleMenu}>
-        <AccountCircle fontSize="large" color="inherit" />
-      </IconButton>
-      <Menu anchorEl={anchorEl} open={!!anchorEl} onClose={handleClose} onClick={handleClose}>
-        <MenuItem>
-          <ListItemIcon>
-            <Edit fontSize="small" />
-          </ListItemIcon>
-          Edit Profile
+    <Menu>
+      <MenuButton as={Avatar} size="sm" cursor="pointer" />
+      <MenuList>
+        <MenuItem icon={<Edit size="24" />}>Edit profile</MenuItem>
+        <MenuItem icon={<Exit size="24" />} onClick={handleLogout}>
+          Sign out
         </MenuItem>
-        <Divider />
-        <MenuItem onClick={handleLogout}>
-          <ListItemIcon>
-            <Logout fontSize="small" />
-          </ListItemIcon>
-          Sign Out
-        </MenuItem>
-      </Menu>
-    </>
+      </MenuList>
+    </Menu>
   );
 };

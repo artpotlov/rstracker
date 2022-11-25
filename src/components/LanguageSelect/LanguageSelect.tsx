@@ -1,57 +1,46 @@
 import { useState } from 'react';
-import { Menu, MenuItem, Button, ListItemIcon } from '@mui/material';
-import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
-import flagRu from 'assets/images/header/flag_ru.svg';
-import flagEn from 'assets/images/header/flag_en.svg';
-import { LanguageSelectBox } from './LanguageSelect.styled';
+import { IconButton, Menu, MenuButton, MenuItem, MenuList } from '@chakra-ui/react';
+import { ReactComponent as FlagRu } from 'assets/images/header/flag_ru.svg';
+import { ReactComponent as FlagEn } from 'assets/images/header/flag_en.svg';
 
 const languageItems = [
   {
-    flag: flagEn,
-    country: { value: 'English', code: 'en' },
+    flag: FlagEn,
+    value: 'English',
+    code: 'en',
   },
   {
-    flag: flagRu,
-    country: { value: 'Russian', code: 'ru' },
+    flag: FlagRu,
+    value: 'Русский',
+    code: 'ru',
   },
 ];
 
 type TLanguage = typeof languageItems[0];
 
 export const LanguageSelect = () => {
-  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const [selectLang, setSelectLang] = useState(languageItems[0]);
-
-  const handleClick = (event: React.MouseEvent<HTMLElement>) => {
-    setAnchorEl(event.currentTarget);
-  };
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
 
   const selectLanguage = (lang: TLanguage) => {
     setSelectLang(lang);
-    handleClose();
   };
 
   return (
-    <LanguageSelectBox>
-      <Button
-        variant="outlined"
-        onClick={handleClick}
-        startIcon={<img src={selectLang.flag} />}
-        endIcon={<KeyboardArrowDownIcon />}
+    <Menu>
+      <MenuButton
+        as={IconButton}
+        icon={<selectLang.flag />}
+        colorScheme="whiteAlpha"
+        variant="ghost"
+        size="sm"
       />
-      <Menu anchorEl={anchorEl} open={!!anchorEl} onClose={handleClose}>
+      <MenuList ml="2">
         {languageItems.map((lang) => (
-          <MenuItem onClick={() => selectLanguage(lang)} key={lang.country.code}>
-            <ListItemIcon>
-              <img src={lang.flag} />
-            </ListItemIcon>
-            {lang.country.value}
+          <MenuItem icon={<lang.flag />} onClick={() => selectLanguage(lang)} key={lang.code}>
+            {lang.value}
           </MenuItem>
         ))}
-      </Menu>
-    </LanguageSelectBox>
+      </MenuList>
+    </Menu>
   );
 };
