@@ -35,7 +35,7 @@ export const SignPage = () => {
 
   return (
     <Container pt="50px" ml={{ base: 'auto', md: '10%' }}>
-      <Box maxW="500px" p="20px" boxShadow="md" rounded="md">
+      <Box maxW="500px" px="10px" boxShadow="md" rounded="md">
         <Tabs
           index={tabIndex}
           onChange={handleTabsChange}

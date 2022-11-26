@@ -4,7 +4,6 @@ import { userRedusers } from './user/user.slice';
 
 export const store = configureStore({
   reducer: { sign: signReducer, user: userRedusers },
-  middleware: (getDefaultMiddleware) => getDefaultMiddleware(),
 });
 
 export type TAppDispatch = typeof store.dispatch;
