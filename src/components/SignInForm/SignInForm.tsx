@@ -1,75 +1,58 @@
-import { Controller, useForm } from 'react-hook-form';
-import { Box, TextField } from '@mui/material';
-import { LoadingButton } from '@mui/lab';
+import { FormProvider, useForm } from 'react-hook-form';
+import { Box, Button } from '@chakra-ui/react';
 import { signInThunk } from 'store/sign/sign.thunk';
 import { useAppDispatch } from 'hooks/useAppDispatch';
 import { selectIsLoadingSign } from 'store/sign/sign.selectors';
+import { FormControlBase } from 'components/FormControlBase/FormControlBase';
+import { ControlInputBase } from 'components/ControlInputBase/ControlInputBase';
+import { useTranslation } from 'react-i18next';
 
 type TDataForm = {
   login: string;
   password: string;
 };
 
+const defaultValuesForm = {
+  login: '',
+  password: '',
+};
+
 export const SignInForm = () => {
+  const { t } = useTranslation();
   const dispatch = useAppDispatch();
   const isLoading = selectIsLoadingSign();
 
+  const methodsForm = useForm<TDataForm>({ defaultValues: defaultValuesForm });
+
   const {
-    control,
     handleSubmit,
     formState: { errors },
-  } = useForm<TDataForm>();
+  } = methodsForm;
 
   const onSubmit = (data: TDataForm) => {
     dispatch(signInThunk(data));
   };
 
   return (
-    <Box
-      component="form"
-      onSubmit={handleSubmit(onSubmit)}
-      sx={{
-        paddingTop: '10px',
-        '& .MuiTextField-root': { mb: 3 },
-        '& .MuiFormHelperText-root': { position: 'absolute', bottom: '-20px' },
-      }}
-    >
-      <Controller
-        name="login"
-        control={control}
-        rules={{ required: 'It`s required field' }}
-        defaultValue=""
-        render={({ field }) => (
-          <TextField
-            {...field}
-            label="Login"
-            variant="filled"
-            helperText={errors.login?.message || ''}
-            error={!!errors.login}
-            fullWidth
+    <FormProvider {...methodsForm}>
+      <Box as="form" onSubmit={handleSubmit(onSubmit)}>
+        <FormControlBase label={t('forms.login')} errorMessage={errors.login?.message}>
+          <ControlInputBase
+            name="login"
+            rules={{ required: String(t('validateInput.required')) }}
           />
-        )}
-      />
-      <Controller
-        name="password"
-        control={control}
-        rules={{ required: 'It`s required field' }}
-        defaultValue=""
-        render={({ field }) => (
-          <TextField
-            {...field}
-            label="Password"
+        </FormControlBase>
+        <FormControlBase label={t('forms.password')} errorMessage={errors.password?.message}>
+          <ControlInputBase
+            name="password"
+            rules={{ required: String(t('validateInput.required')) }}
             type="password"
-            variant="filled"
-            helperText={errors.password?.message || ''}
-            error={!!errors.password}
-            fullWidth
           />
-        )}
-      />
-      <LoadingButton type="submit" variant="contained" loading={isLoading}>
-        Sign In
-      </LoadingButton>
-    </Box>
+        </FormControlBase>
+        <Button colorScheme="blue" mt={4} size="sm" isLoading={isLoading} type="submit">
+          {t('forms.send')}
+        </Button>
+      </Box>
+    </FormProvider>
   );
 };

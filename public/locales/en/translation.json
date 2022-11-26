@@ -1,12 +1,20 @@
 {
-  "app": {
-    "welcome": "Welcome to the page!"
-  },
   "header": {
     "boards": "Boards",
     "auth": "Sign in/up",
     "edit": "Edit",
     "logout": "Log out",
     "search": "Search"
+  },
+  "forms": {
+    "signIn": "Sign in",
+    "signUp": "Sign up",
+    "name": "Name",
+    "login": "Login",
+    "password": "Password",
+    "send": "Send"
+  },
+  "validateInput": {
+    "required": "It`s required field"
   }
 }

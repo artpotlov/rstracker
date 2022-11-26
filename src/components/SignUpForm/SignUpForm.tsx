@@ -1,10 +1,12 @@
-import { Box, TextField } from '@mui/material';
-import { LoadingButton } from '@mui/lab';
-import { Controller, useForm } from 'react-hook-form';
+import { Button, Box } from '@chakra-ui/react';
+import { FormProvider, useForm } from 'react-hook-form';
 import { selectCreatedUserSign, selectIsLoadingSign } from 'store/sign/sign.selectors';
 import { signUpThunk } from 'store/sign/sign.thunk';
 import { useAppDispatch } from 'hooks/useAppDispatch';
 import { useEffect } from 'react';
+import { FormControlBase } from 'components/FormControlBase/FormControlBase';
+import { ControlInputBase } from 'components/ControlInputBase/ControlInputBase';
+import { useTranslation } from 'react-i18next';
 
 type TDataForm = {
   name: string;
@@ -12,17 +14,25 @@ type TDataForm = {
   password: string;
 };
 
+const defaultValuesForm = {
+  name: '',
+  login: '',
+  password: '',
+};
+
 export const SignUpForm = () => {
+  const { t } = useTranslation();
   const dispatch = useAppDispatch();
   const isLoading = selectIsLoadingSign();
   const createdUser = selectCreatedUserSign();
 
+  const methodsForm = useForm<TDataForm>({ defaultValues: defaultValuesForm });
+
   const {
-    control,
     handleSubmit,
     formState: { errors },
     reset,
-  } = useForm<TDataForm>();
+  } = methodsForm;
 
   const onSubmit = (data: TDataForm) => {
     dispatch(signUpThunk(data));
@@ -35,67 +45,28 @@ export const SignUpForm = () => {
   }, [createdUser, reset]);
 
   return (
-    <Box
-      component="form"
-      onSubmit={handleSubmit(onSubmit)}
-      sx={{
-        paddingTop: '10px',
-        '& .MuiTextField-root': { mb: 3 },
-        '& .MuiFormHelperText-root': { position: 'absolute', bottom: '-20px' },
-      }}
-    >
-      <Controller
-        name="name"
-        control={control}
-        rules={{ required: 'It`s required field' }}
-        defaultValue=""
-        render={({ field }) => (
-          <TextField
-            {...field}
-            label="Name"
-            variant="filled"
-            helperText={errors.login?.message || ''}
-            error={!!errors.login}
-            fullWidth
+    <FormProvider {...methodsForm}>
+      <Box as="form" onSubmit={handleSubmit(onSubmit)}>
+        <FormControlBase label={t('forms.name')} errorMessage={errors.name?.message}>
+          <ControlInputBase name="name" rules={{ required: String(t('validateInput.required')) }} />
+        </FormControlBase>
+        <FormControlBase label={t('forms.login')} errorMessage={errors.name?.message}>
+          <ControlInputBase
+            name="login"
+            rules={{ required: String(t('validateInput.required')) }}
           />
-        )}
-      />
-      <Controller
-        name="login"
-        control={control}
-        rules={{ required: 'It`s required field' }}
-        defaultValue=""
-        render={({ field }) => (
-          <TextField
-            {...field}
-            label="Login"
-            variant="filled"
-            helperText={errors.login?.message || ''}
-            error={!!errors.login}
-            fullWidth
-          />
-        )}
-      />
-      <Controller
-        name="password"
-        control={control}
-        rules={{ required: 'It`s required field' }}
-        defaultValue=""
-        render={({ field }) => (
-          <TextField
-            {...field}
-            label="Password"
+        </FormControlBase>
+        <FormControlBase label={t('forms.password')} errorMessage={errors.name?.message}>
+          <ControlInputBase
+            name="password"
+            rules={{ required: String(t('validateInput.required')) }}
             type="password"
-            variant="filled"
-            helperText={errors.password?.message || ''}
-            error={!!errors.password}
-            fullWidth
           />
-        )}
-      />
-      <LoadingButton type="submit" variant="contained" loading={isLoading}>
-        Sign Up
-      </LoadingButton>
-    </Box>
+        </FormControlBase>
+        <Button colorScheme="blue" mt={4} size="sm" isLoading={isLoading} type="submit">
+          {t('forms.send')}
+        </Button>
+      </Box>
+    </FormProvider>
   );
 };
