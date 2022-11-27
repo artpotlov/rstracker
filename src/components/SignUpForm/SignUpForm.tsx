@@ -50,13 +50,13 @@ export const SignUpForm = () => {
         <FormControlBase label={t('forms.name')} errorMessage={errors.name?.message}>
           <ControlInputBase name="name" rules={{ required: String(t('validateInput.required')) }} />
         </FormControlBase>
-        <FormControlBase label={t('forms.login')} errorMessage={errors.name?.message}>
+        <FormControlBase label={t('forms.login')} errorMessage={errors.login?.message}>
           <ControlInputBase
             name="login"
             rules={{ required: String(t('validateInput.required')) }}
           />
         </FormControlBase>
-        <FormControlBase label={t('forms.password')} errorMessage={errors.name?.message}>
+        <FormControlBase label={t('forms.password')} errorMessage={errors.password?.message}>
           <ControlInputBase
             name="password"
             rules={{ required: String(t('validateInput.required')) }}
