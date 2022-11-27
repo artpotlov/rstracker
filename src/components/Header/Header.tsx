@@ -73,7 +73,7 @@ export const Header = () => {
         </Flex>
       </Flex>
       <Divider />
-      <Portal title="Create board" handleClose={toggleCreateBoard} isOpen={isCreateBoard}>
+      <Portal title={t('forms.createBoard')} handleClose={toggleCreateBoard} isOpen={isCreateBoard}>
         <CreateBoardForm />
       </Portal>
     </>

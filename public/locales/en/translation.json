@@ -17,7 +17,8 @@
     "cancel": "Cancel",
     "title": "Name",
     "owner": "Owner",
-    "users": "Users"
+    "users": "Users",
+    "createBoard": "Create board"
   },
   "validateInput": {
     "required": "It`s required field"
