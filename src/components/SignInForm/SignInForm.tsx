@@ -6,13 +6,9 @@ import { selectIsLoadingSign } from 'store/sign/sign.selectors';
 import { FormControlBase } from 'components/FormControlBase/FormControlBase';
 import { ControlInputBase } from 'components/ControlInputBase/ControlInputBase';
 import { useTranslation } from 'react-i18next';
+import { TUserAuth } from 'types/types';
 
-type TDataForm = {
-  login: string;
-  password: string;
-};
-
-const defaultValuesForm = {
+const defaultValuesForm: TUserAuth = {
   login: '',
   password: '',
 };
@@ -22,14 +18,14 @@ export const SignInForm = () => {
   const dispatch = useAppDispatch();
   const isLoading = selectIsLoadingSign();
 
-  const methodsForm = useForm<TDataForm>({ defaultValues: defaultValuesForm });
+  const methodsForm = useForm<TUserAuth>({ defaultValues: defaultValuesForm });
 
   const {
     handleSubmit,
     formState: { errors },
   } = methodsForm;
 
-  const onSubmit = (data: TDataForm) => {
+  const onSubmit = (data: TUserAuth) => {
     dispatch(signInThunk(data));
   };
 

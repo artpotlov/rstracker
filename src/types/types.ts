@@ -51,6 +51,8 @@ export type TBoardsSetRequest = {
   userId: string;
 };
 
+export type TBoardCreate = Omit<TBoardSuccess, '_id'>;
+
 export type TUserCreate = Omit<TUser, '_id'>;
 
 export type TUserAuth = Omit<TUser, '_id' | 'name'>;

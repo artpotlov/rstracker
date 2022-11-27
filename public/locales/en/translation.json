@@ -12,7 +12,12 @@
     "name": "Name",
     "login": "Login",
     "password": "Password",
-    "send": "Send"
+    "send": "Send",
+    "create": "Create",
+    "cancel": "Cancel",
+    "title": "Name",
+    "owner": "Owner",
+    "users": "Users"
   },
   "validateInput": {
     "required": "It`s required field"
