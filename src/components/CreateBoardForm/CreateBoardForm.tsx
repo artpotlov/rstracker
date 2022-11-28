@@ -45,7 +45,7 @@ export const CreateBoardForm = () => {
   } = methodsForm;
 
   const onSubmit = (data: TValuesForm) => {
-    const owner = JSON.stringify({ login: authUser?.login, userId: authUser?.userId });
+    const owner = authUser?.login || '';
     const users = data.users.map((user) => user.value);
     dispatch(createBoardThunk({ ...data, owner, users }));
   };

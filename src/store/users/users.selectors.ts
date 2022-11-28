@@ -7,5 +7,5 @@ export const selectErrorUsers = () => SelectUsers().errorMessage;
 export const selectAllUsers = () => SelectUsers().allUsers;
 export const selectAllUsersOptions = () => {
   const allUsers = selectAllUsers();
-  return allUsers?.map((user) => ({ label: user.login, value: JSON.stringify(user) })) || [];
+  return allUsers?.map(({ login }) => ({ label: login, value: login })) || [];
 };
