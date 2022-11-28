@@ -22,5 +22,9 @@
   },
   "validateInput": {
     "required": "Обязательное поле"
+  },
+  "boards": {
+    "title": "Доски",
+    "delete": "Удалить"
   }
 }

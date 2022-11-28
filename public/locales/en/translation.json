@@ -22,5 +22,9 @@
   },
   "validateInput": {
     "required": "It`s required field"
+  },
+  "boards": {
+    "title": "Boards",
+    "delete": "Delete"
   }
 }
