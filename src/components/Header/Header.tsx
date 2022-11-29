@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Button, Divider, Flex } from '@chakra-ui/react';
 import { GroupObjectsNew } from '@carbon/icons-react';
@@ -11,9 +12,13 @@ import { pathRoutes } from 'router/router';
 import { selectAuthUser } from 'store/user/user.selectors';
 import { userActions } from 'store/user/user.slice';
 import { useAppDispatch } from 'hooks/useAppDispatch';
+import { Portal } from 'components/Portal/Portal';
+import { CreateBoardForm } from 'components/CreateBoardForm/CreateBoardForm';
+import { getAllUsersThunk } from 'store/users/users.thunk';
 
 export const Header = () => {
   const { t } = useTranslation();
+  const [isCreateBoard, setCreateBoard] = useState(false);
   const dispatch = useAppDispatch();
   const { pathname } = useLocation();
   const isBoardPage = new RegExp(`^/${pathRoutes.boards}`).test(pathname);
@@ -22,6 +27,13 @@ export const Header = () => {
 
   const handleLogout = () => {
     dispatch(logoutUser());
+  };
+
+  const toggleCreateBoard = () => {
+    if (!isCreateBoard) {
+      dispatch(getAllUsersThunk());
+    }
+    setCreateBoard((prev) => !prev);
   };
 
   return (
@@ -44,7 +56,11 @@ export const Header = () => {
           {isBoardPage ? (
             <>
               <Searching />
-              <IconButtonBase aria-label="add board" icon={<GroupObjectsNew size="24" />} />
+              <IconButtonBase
+                aria-label="add board"
+                icon={<GroupObjectsNew size="24" />}
+                onClick={toggleCreateBoard}
+              />
             </>
           ) : (
             <Link to={authUser ? pathRoutes.boards : pathRoutes.sign}>
@@ -57,6 +73,9 @@ export const Header = () => {
         </Flex>
       </Flex>
       <Divider />
+      <Portal title={t('forms.createBoard')} handleClose={toggleCreateBoard} isOpen={isCreateBoard}>
+        <CreateBoardForm />
+      </Portal>
     </>
   );
 };

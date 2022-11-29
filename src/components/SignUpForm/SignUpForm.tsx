@@ -7,14 +7,9 @@ import { useEffect } from 'react';
 import { FormControlBase } from 'components/FormControlBase/FormControlBase';
 import { ControlInputBase } from 'components/ControlInputBase/ControlInputBase';
 import { useTranslation } from 'react-i18next';
+import { TUserCreate } from 'types/types';
 
-type TDataForm = {
-  name: string;
-  login: string;
-  password: string;
-};
-
-const defaultValuesForm = {
+const defaultValuesForm: TUserCreate = {
   name: '',
   login: '',
   password: '',
@@ -26,7 +21,7 @@ export const SignUpForm = () => {
   const isLoading = selectIsLoadingSign();
   const createdUser = selectCreatedUserSign();
 
-  const methodsForm = useForm<TDataForm>({ defaultValues: defaultValuesForm });
+  const methodsForm = useForm<TUserCreate>({ defaultValues: defaultValuesForm });
 
   const {
     handleSubmit,
@@ -34,7 +29,7 @@ export const SignUpForm = () => {
     reset,
   } = methodsForm;
 
-  const onSubmit = (data: TDataForm) => {
+  const onSubmit = (data: TUserCreate) => {
     dispatch(signUpThunk(data));
   };
 

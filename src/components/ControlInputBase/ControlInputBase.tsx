@@ -1,24 +1,17 @@
 import { Input, InputProps } from '@chakra-ui/react';
-import { useFormContext } from 'react-hook-form';
+import { useController, UseControllerProps } from 'react-hook-form';
 
-type TControlInputBaseProps = {
-  name: string;
-  rules: Record<string, string>;
-};
+type TControlInputBaseProps = UseControllerProps & InputProps;
 
-export const ControlInputBase = ({
-  name,
-  rules,
-  ...inputProps
-}: TControlInputBaseProps & InputProps) => {
-  const { register } = useFormContext();
+export const ControlInputBase = ({ name, rules, ...inputProps }: TControlInputBaseProps) => {
+  const { field } = useController({ name, rules });
 
   return (
     <Input
       size="sm"
       errorBorderColor="red.300"
       _focus={{ borderColor: 'blue.500' }}
-      {...register(name, rules)}
+      {...field}
       {...inputProps}
     />
   );
