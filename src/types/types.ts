@@ -123,3 +123,30 @@ export type TPointUpdateRequest = {
 export type TPointDeleteRequest = {
   pointId: string;
 };
+
+export type TTasksSuccess = {
+  _id: string;
+  title: string;
+  order: number;
+  boardId: string;
+  columnId: string;
+  description: string;
+  userId: number;
+  users: string[];
+};
+
+export type TTasksRequest = {
+  taskId: string;
+} & Omit<TTasksSuccess, '_id'>;
+
+export type TNewTaskDataRequest = {
+  newTaskData: Omit<TTasksRequest, 'taskId' | 'boardId'>;
+} & Pick<TTasksRequest, 'boardId' | 'columnId' | 'taskId'>;
+
+export type TTasksSetRequest = {
+  ids?: string[];
+  userId?: string;
+  search?: string;
+};
+
+export type TTasksSetUpdateRequest = Pick<TTasksSuccess, '_id' | 'order' | 'columnId'>[];
