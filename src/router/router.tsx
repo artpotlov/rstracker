@@ -5,12 +5,14 @@ import { HomePage } from 'pages/HomePage';
 import { BoardPage } from 'pages/BoardPage';
 import { ErrorPage } from 'pages/ErrorPage';
 import { SignPage } from 'pages/SignPage';
+import { ProfilePage } from 'pages/ProfilePage';
 
 export enum pathRoutes {
   welcome = '/',
   boards = 'boards',
   sign = 'sign',
   errorPath = '404',
+  profile = 'profile',
 }
 
 const routes = [
@@ -33,6 +35,10 @@ const routes = [
       {
         path: pathRoutes.sign,
         element: <SignPage />,
+      },
+      {
+        path: pathRoutes.profile,
+        element: <ProfilePage />,
       },
     ],
     errorElement: <ErrorPage />,

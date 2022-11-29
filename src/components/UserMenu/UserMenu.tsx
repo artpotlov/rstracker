@@ -4,16 +4,17 @@ import { useTranslation } from 'react-i18next';
 
 type TUserMenuProps = {
   handleLogout: () => void;
+  handleEdit: () => void;
 };
 
-export const UserMenu = ({ handleLogout }: TUserMenuProps) => {
+export const UserMenu = ({ handleLogout, handleEdit }: TUserMenuProps) => {
   const { t } = useTranslation();
 
   return (
     <Menu>
       <MenuButton as={Avatar} size="sm" cursor="pointer" />
       <MenuList>
-        <MenuItem>
+        <MenuItem onClick={handleEdit}>
           <Edit size="24" />
           <Text pl={2}>{t('header.edit')}</Text>
         </MenuItem>

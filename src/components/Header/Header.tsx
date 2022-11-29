@@ -46,6 +46,10 @@ export const Header = () => {
     });
   }, [scrollY]);
 
+  /* const handleEdit = () => {
+    navigate(pathRoutes.profile);
+  }; */
+
   return (
     <>
       <Flex
@@ -83,6 +87,7 @@ export const Header = () => {
             </Link>
           )}
           {!!authUser && <UserMenu handleLogout={handleLogout} />}
+          {/* {isAuth && <UserMenu handleLogout={handleLogout} handleEdit={handleEdit} />} */}
         </Flex>
         <ScrollLine />
       </Flex>
