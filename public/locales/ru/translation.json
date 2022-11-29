@@ -1,12 +1,20 @@
 {
-  "app": {
-    "welcome": "Добро пожаловать на страницу!"
-  },
   "header": {
     "boards": "Доски",
     "auth": "Войти",
     "edit": "Профиль",
     "logout": "Выйти",
     "search": "Поиск"
+  },
+  "forms": {
+    "signIn": "Вход",
+    "signUp": "Регистрация",
+    "name": "Имя",
+    "login": "Логин",
+    "password": "Пароль",
+    "send": "Отправить"
+  },
+  "validateInput": {
+    "required": "Обязательное поле"
   }
 }

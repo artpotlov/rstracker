@@ -1,3 +1,9 @@
+import { PageGuard } from 'hoc/PageGuard';
+
 export const HomePage = () => {
-  return <div>Home Page</div>;
+  return (
+    <PageGuard>
+      <div>Home Page</div>
+    </PageGuard>
+  );
 };

@@ -5,7 +5,7 @@ export const ErrorPage = () => {
   const { pathname } = useLocation();
 
   if (pathname !== `/${pathRoutes.errorPath}`) {
-    return <Navigate to={pathRoutes.errorPath} state={{ from: location }} />;
+    return <Navigate to={`/${pathRoutes.errorPath}`} replace />;
   }
 
   return <div>Error Page</div>;

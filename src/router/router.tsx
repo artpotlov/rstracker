@@ -4,12 +4,12 @@ import { WelcomePage } from 'pages/WelcomePage';
 import { HomePage } from 'pages/HomePage';
 import { BoardPage } from 'pages/BoardPage';
 import { ErrorPage } from 'pages/ErrorPage';
+import { SignPage } from 'pages/SignPage';
 
 export enum pathRoutes {
   welcome = '/',
   boards = 'boards',
-  auth = 'auth',
-  registration = 'registration',
+  sign = 'sign',
   errorPath = '404',
 }
 
@@ -29,6 +29,10 @@ const routes = [
       {
         path: `${pathRoutes.boards}/:id`,
         element: <BoardPage />,
+      },
+      {
+        path: pathRoutes.sign,
+        element: <SignPage />,
       },
     ],
     errorElement: <ErrorPage />,

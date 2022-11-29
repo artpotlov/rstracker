@@ -1,3 +1,9 @@
+import { PageGuard } from 'hoc/PageGuard';
+
 export const BoardPage = () => {
-  return <div>Board Page</div>;
+  return (
+    <PageGuard>
+      <div>Board Page</div>
+    </PageGuard>
+  );
 };
