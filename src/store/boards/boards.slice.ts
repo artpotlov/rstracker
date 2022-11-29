@@ -7,12 +7,16 @@ type TInitialState = {
   isLoading: boolean;
   errorMessage: string;
   createdBoard: TCreatedBoard;
+  allBoards: TBoardSuccess[];
+  deletedBoard: TBoardSuccess | null;
 };
 
 const initialState: TInitialState = {
   isLoading: false,
   errorMessage: '',
   createdBoard: null,
+  allBoards: [],
+  deletedBoard: null,
 };
 
 const boardsSlice = createSlice({
@@ -27,6 +31,15 @@ const boardsSlice = createSlice({
     },
     setCreatedBoard: (state, { payload }: PayloadAction<TCreatedBoard>) => {
       state.createdBoard = payload;
+    },
+    setAllBoard: (state, { payload }: PayloadAction<TBoardSuccess[]>) => {
+      state.allBoards = payload;
+    },
+    setDeletedBoard: (state, { payload }: PayloadAction<TBoardSuccess | null>) => {
+      state.deletedBoard = payload;
+    },
+    deleteBoard: (state, { payload }: PayloadAction<TBoardSuccess>) => {
+      state.allBoards = state.allBoards.filter((board) => board._id !== payload._id);
     },
   },
 });
