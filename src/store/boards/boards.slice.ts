@@ -31,6 +31,9 @@ const boardsSlice = createSlice({
     },
     setCreatedBoard: (state, { payload }: PayloadAction<TCreatedBoard>) => {
       state.createdBoard = payload;
+      if (payload) {
+        state.allBoards.push(payload);
+      }
     },
     setAllBoard: (state, { payload }: PayloadAction<TBoardSuccess[]>) => {
       state.allBoards = payload;

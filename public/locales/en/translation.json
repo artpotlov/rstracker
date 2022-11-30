@@ -18,7 +18,8 @@
     "title": "Name",
     "owner": "Owner",
     "users": "Users",
-    "createBoard": "Create board"
+    "createBoard": "Create board",
+    "columnName": "Column name"
   },
   "validateInput": {
     "required": "It`s required field"
@@ -36,5 +37,11 @@
   },
   "errorPage": {
     "returnButton": "Return to main page"
+  },
+  "columns": {
+    "back": "Back",
+    "noData": "Columns is absent",
+    "create": "Create column",
+    "delete": "Delete"
   }
 }
