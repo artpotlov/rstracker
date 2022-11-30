@@ -26,5 +26,12 @@
   "boards": {
     "title": "Доски",
     "delete": "Удалить"
+  },
+  "footer": {
+    "github": {
+      "artpotlov": "Артем Потлов",
+      "tonKristall": "Александр Шустов",
+      "slavaShchipunov": "Святослав Щипунов"
+    }
   }
 }
