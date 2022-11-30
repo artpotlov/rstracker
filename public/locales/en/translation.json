@@ -26,5 +26,12 @@
   "boards": {
     "title": "Boards",
     "delete": "Delete"
+  },
+  "footer": {
+    "github": {
+      "artpotlov": "Artem Potlov",
+      "tonKristall": "Alexander Shustov",
+      "slavaShchipunov": "Slava Shchipunov"
+    }
   }
 }
