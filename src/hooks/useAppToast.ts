@@ -1,6 +1,11 @@
 import { useToast } from '@chakra-ui/react';
 
 type TToastStatus = 'success' | 'warning' | 'error' | 'info';
+type TToastArgs = {
+  status: TToastStatus;
+  title?: string;
+  description?: string;
+};
 
 export const useAppToast = () => {
   const toast = useToast({
@@ -9,7 +14,7 @@ export const useAppToast = () => {
     position: 'bottom',
   });
 
-  return (status: TToastStatus, title?: string, description?: string) => {
+  return ({ status, title, description }: TToastArgs) => {
     toast({
       status,
       title,
