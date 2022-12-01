@@ -4,6 +4,7 @@ import { columnsReducer } from './columns/columns.slice';
 import { signReducer } from './sign/sign.slice';
 import { userRedusers } from './user/user.slice';
 import { usersReducer } from './users/users.slice';
+import { columnsReducer } from './columns/columns.slice';
 
 export const store = configureStore({
   reducer: {
