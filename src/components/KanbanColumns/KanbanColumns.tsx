@@ -1,6 +1,4 @@
-import { MouseEvent } from 'react';
 import { useTranslation } from 'react-i18next';
-import { TColumnSuccess } from 'types/types';
 import {
   selectAllColumns,
   selectBoard,
@@ -15,6 +13,8 @@ import { LoaderPage } from 'components/LoaderPage/LoaderPage';
 import { Portal } from 'components/Portal/Portal';
 import { useAppDispatch } from 'hooks/useAppDispatch';
 import { ConfirmModal } from 'components/ConfirmModal/ConfirmModal';
+import { Box, Flex } from '@chakra-ui/react';
+import { ColumnBoard } from 'components/ColumnBoard/ColumnBoard';
 
 export const KanbanColumns = () => {
   const { t } = useTranslation();
@@ -25,11 +25,6 @@ export const KanbanColumns = () => {
   const deletedColumn = selectDeletedColumn();
   const board = selectBoard();
   const { setDeletedColumn } = columnsActions;
-
-  const deleteColumn = (event: MouseEvent<HTMLButtonElement>, column: TColumnSuccess) => {
-    event.stopPropagation();
-    dispatch(setDeletedColumn(column));
-  };
 
   const confirmDeleteColumn = () => {
     if (deletedColumn && board) {
@@ -51,16 +46,12 @@ export const KanbanColumns = () => {
   }
 
   return (
-    <>
-      {columns.map((column) => (
-        //todo верстка колонок
-        <div key={column._id}>
-          {column.title}{' '}
-          <button type="button" onClick={(event) => deleteColumn(event, column)}>
-            delete
-          </button>
-        </div>
-      ))}
+    <Box height="100%" maxH="100%" overflowX="auto" overflowY="hidden" flexGrow={1}>
+      <Flex height="100%" maxH="100%" gap="4">
+        {columns.map((column) => (
+          <ColumnBoard key={column._id} column={column} />
+        ))}
+      </Flex>
       <Portal
         title={`${t('columns.delete')} ${deletedColumn?.title}?`}
         handleClose={handleCloseConfirm}
@@ -68,6 +59,6 @@ export const KanbanColumns = () => {
       >
         <ConfirmModal confirm={confirmDeleteColumn} isLoading={isUploading} />
       </Portal>
-    </>
+    </Box>
   );
 };
