@@ -6,9 +6,6 @@ import {
   CardBody,
   CardFooter,
   CardHeader,
-  Editable,
-  EditableInput,
-  EditablePreview,
   Flex,
   Heading,
   Stack,
@@ -17,9 +14,11 @@ import {
 import { Draggable } from '@hello-pangea/dnd';
 import { useAppDispatch } from 'hooks/useAppDispatch';
 import { columnsActions } from 'store/columns/columns.slice';
+import { editColumnTitleThunk } from 'store/columns/columns.thunk';
 import { TColumnSuccess } from 'types/types';
 import { IconButtonBase } from 'components/IconButtonBase/IconButtonBase';
 import { DraggableLine } from 'components/DraggableLine/DraggableLine';
+import { EditableHead } from 'components/EditableHead/EditableHead';
 
 type TColumnBoardProps = {
   column: TColumnSuccess;
@@ -32,6 +31,10 @@ export const ColumnBoard = ({ column, index }: TColumnBoardProps) => {
 
   const deleteColumn = () => {
     dispatch(setDeletedColumn(column));
+  };
+
+  const editColumnTitle = (title: string) => {
+    dispatch(editColumnTitleThunk({ ...column, title, index }));
   };
 
   const toggleCreateCard = () => {
@@ -54,14 +57,7 @@ export const ColumnBoard = ({ column, index }: TColumnBoardProps) => {
             <DraggableLine {...provided} />
             <CardHeader p={0} pb={1} px={2}>
               <Flex justifyContent="space-between" alignItems="center" gap={2}>
-                <Editable size="md" flexGrow={1} defaultValue={column.title}>
-                  <EditablePreview fontWeight="bold" />
-                  <EditableInput
-                    px={1}
-                    backgroundColor="white"
-                    _focus={{ boxShadow: '0 0 0 1px #3182ce', border: '1px solid #3182ce' }}
-                  />
-                </Editable>
+                <EditableHead title={column.title} handleSubmit={editColumnTitle} />
                 <IconButtonBase
                   aria-label="delete column"
                   icon={<TrashCan size={24} />}
