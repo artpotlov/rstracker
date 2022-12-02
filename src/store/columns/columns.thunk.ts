@@ -1,8 +1,14 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { getBoardById } from 'api/boards';
-import { createNewColumn, deleteColumnById, getAllColumns } from 'api/columns';
+import {
+  createNewColumn,
+  deleteColumnById,
+  getAllColumns,
+  updateOrdersInColumns,
+} from 'api/columns';
 import { handleError } from 'api/handleError';
-import { TColumnRequest, TColumnSuccess } from 'types/types';
+import { TRootState } from 'store/store';
+import { TColumnCreateRequest, TColumnRequest, TColumnSuccess } from 'types/types';
 import { columnsActions } from './columns.slice';
 
 export const getAllColumnsThunk = createAsyncThunk(
@@ -27,7 +33,7 @@ export const getAllColumnsThunk = createAsyncThunk(
 
 export const createColumnThunk = createAsyncThunk(
   'createColumn',
-  async (columnData: Omit<TColumnSuccess, '_id'>, { dispatch }) => {
+  async (columnData: TColumnCreateRequest, { dispatch }) => {
     const { setUploading, setError, setCreatedColumn } = columnsActions;
     dispatch(setError(''));
     dispatch(setCreatedColumn(null));
@@ -57,6 +63,27 @@ export const deleteColumnThunk = createAsyncThunk(
     } catch (error) {
       const errorMessage = handleError(error).message;
       dispatch(setError(errorMessage));
+    } finally {
+      dispatch(setUploading(false));
+    }
+  }
+);
+
+export const moveColumnThunk = createAsyncThunk<unknown, TColumnSuccess[], { state: TRootState }>(
+  'moveColumn',
+  async (newColumn, { dispatch, getState }) => {
+    const { setUploading, setError, setAllColumns } = columnsActions;
+    const oldColumns = getState().columns.allColumns;
+    const sendData = newColumn.map((column, index) => ({ _id: column._id, order: index }));
+    dispatch(setAllColumns(newColumn));
+    dispatch(setError(''));
+    dispatch(setUploading(true));
+    try {
+      await updateOrdersInColumns(sendData);
+    } catch (error) {
+      const errorMessage = handleError(error).message;
+      dispatch(setError(errorMessage));
+      dispatch(setAllColumns(oldColumns));
     } finally {
       dispatch(setUploading(false));
     }

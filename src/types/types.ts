@@ -75,7 +75,9 @@ export type TColumnsSetRequest = {
 
 export type TColumnsSetUpdateRequest = Pick<TColumnSuccess, '_id' | 'order'>[];
 
-export type TColumnsSetCreateRequest = Omit<TColumnSuccess, '_id'>[];
+export type TColumnCreateRequest = Omit<TColumnSuccess, '_id'>;
+
+export type TColumnsSetCreateRequest = TColumnCreateRequest[];
 
 export type TFileSuccess = {
   _id: string;
