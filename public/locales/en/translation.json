@@ -69,5 +69,53 @@
     "deleteQuestion": "Do you want to delete the task",
     "author": "Task author",
     "users": "Participants"
+  },
+  "welcome": {
+    "sectionOne": {
+      "title": "Organize your tasks in the ",
+      "buttonStart": "Start"
+    },
+    "sectionTwo": {
+      "title": "Organization and overview",
+      "description": "RS Tracker gives you an overview of your entire project so you can clearly see the big picture of all the team's tasks"
+    },
+    "sectionThree": {
+      "featureOne": {
+        "title": "Intuitive interface",
+        "description": "Simple and intuitive interface"
+      },
+      "featureTwo": {
+        "title": "Unlimited speakers",
+        "description": "RS Tracker provides the ability to create an unlimited number of speakers"
+      },
+      "featureThree": {
+        "title": "Assign performers",
+        "description": "The application provides the ability to assign performers to tasks"
+      }
+    },
+    "sectionFour": {
+      "blockOne": "This application is the result of the work of a small team as part of the REACT 2022 Q3 course at the Rolling Scopes School.",
+      "blockTwo": "is a free educational platform run by The Rolling Scopes developer community since 2013."
+    },
+    "sectionFive": {
+      "title": "Our team",
+      "teams": {
+        "artpotlov": {
+          "name": "Artem Potlov",
+          "position": "Team lead, developer",
+          "description": "Тимлидил проект"
+        },
+        "tonKristall": {
+          "name": "Alexander Shustov",
+          "position": "Developer",
+          "description": "Разрабатывал проект"
+        },
+        "slavaShchipunov": {
+          "name": "Svyatoslav Shchipunov",
+          "position": "Developer",
+          "description": "Разрабатывал проект"
+        }
+      }
+    }
   }
 }
