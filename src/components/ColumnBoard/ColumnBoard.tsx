@@ -58,11 +58,9 @@ export const ColumnBoard = ({ column, index }: TColumnBoardProps) => {
             <CardHeader p={0} pb={1} px={2}>
               <Flex justifyContent="space-between" alignItems="center" gap={2}>
                 <EditableHead title={column.title} handleSubmit={editColumnTitle} />
-                <IconButtonBase
-                  aria-label="delete column"
-                  icon={<TrashCan size={24} />}
-                  onClick={deleteColumn}
-                />
+                <IconButtonBase aria-label="delete column" onClick={deleteColumn}>
+                  <TrashCan size={24} />
+                </IconButtonBase>
               </Flex>
             </CardHeader>
             <CardBody px={0} py={2} overflowX="hidden" overflowY="auto">
@@ -94,10 +92,10 @@ export const ColumnBoard = ({ column, index }: TColumnBoardProps) => {
                 h="auto"
                 color="gray.500"
                 _hover={{ color: 'blue.500' }}
-                leftIcon={<GroupObjectsNew size="24" />}
                 onClick={toggleCreateCard}
               >
-                Добавить задачу
+                <GroupObjectsNew size="24" />
+                <Text pl={2}>Добавить задачу</Text>
               </Button>
             </CardFooter>
           </Card>

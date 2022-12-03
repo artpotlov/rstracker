@@ -1,9 +1,11 @@
 import { forwardRef } from 'react';
-import { IconButton, IconButtonProps } from '@chakra-ui/react';
+import { Button, ButtonProps } from '@chakra-ui/react';
 
-export const IconButtonBase = forwardRef<HTMLButtonElement, IconButtonProps>((props, ref) => {
+type TIconButtonProps = ButtonProps & { children: JSX.Element };
+
+export const IconButtonBase = forwardRef<HTMLButtonElement, TIconButtonProps>((props, ref) => {
   return (
-    <IconButton
+    <Button
       colorScheme="whiteAlpha"
       variant="ghost"
       size="xs"
@@ -12,6 +14,8 @@ export const IconButtonBase = forwardRef<HTMLButtonElement, IconButtonProps>((pr
       _hover={{ color: 'blue.500' }}
       {...props}
       ref={ref}
-    />
+    >
+      {props.children}
+    </Button>
   );
 });

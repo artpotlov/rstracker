@@ -70,11 +70,9 @@ export const Header = () => {
           {isBoardPage ? (
             <>
               <Searching />
-              <IconButtonBase
-                aria-label="add board"
-                icon={<GroupObjectsNew size="24" />}
-                onClick={toggleCreateBoard}
-              />
+              <IconButtonBase aria-label="add board" onClick={toggleCreateBoard}>
+                <GroupObjectsNew size="24" />
+              </IconButtonBase>
             </>
           ) : (
             <Link to={authUser ? pathRoutes.boards : pathRoutes.sign}>

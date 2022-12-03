@@ -42,12 +42,12 @@ export const EditableHead = ({ title, handleSubmit }: TEditebleHeadProps) => {
         transform="translate(0, -50%)"
         zIndex={10}
       >
-        <IconButtonBase
-          _hover={{ color: 'green.500' }}
-          icon={<CheckmarkOutline size={20} />}
-          {...getSubmitButtonProps()}
-        />
-        <IconButtonBase icon={<CloseOutline size={20} />} {...getCancelButtonProps()} />
+        <IconButtonBase _hover={{ color: 'green.500' }} {...getSubmitButtonProps()}>
+          <CheckmarkOutline size={20} />
+        </IconButtonBase>
+        <IconButtonBase {...getCancelButtonProps()}>
+          <CloseOutline size={20} />
+        </IconButtonBase>
       </ButtonGroup>
     ) : null;
   };
