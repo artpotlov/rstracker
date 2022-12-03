@@ -82,11 +82,16 @@ export const KanbanColumns = () => {
         </Droppable>
       </DragDropContext>
       <Portal
-        title={`${t('columns.delete')} ${deletedColumn?.title}?`}
+        title={t('columns.deleteTitle')}
         handleClose={handleCloseConfirm}
         isOpen={!!deletedColumn}
       >
-        <ConfirmModal confirm={confirmDeleteColumn} isLoading={isUploading} />
+        <ConfirmModal
+          confirm={confirmDeleteColumn}
+          isLoading={isUploading}
+          question={`${t('columns.deleteQuestion')} ${deletedColumn?.title}?`}
+          handleClose={handleCloseConfirm}
+        />
       </Portal>
     </Box>
   );

@@ -11,6 +11,10 @@ import { selectAllUsersOptions } from 'store/users/users.selectors';
 import { ControlSelectBase } from 'components/ControlSelectBase/ControlSelectBase';
 import { selectAuthUser } from 'store/user/user.selectors';
 
+type TCreateBoardFormProps = {
+  handleClose: () => void;
+};
+
 type TUsersForm = {
   label: string;
   value: string;
@@ -28,7 +32,7 @@ const defaultValuesForm: TValuesForm = {
   owner: '',
 };
 
-export const CreateBoardForm = () => {
+export const CreateBoardForm = ({ handleClose }: TCreateBoardFormProps) => {
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
   const isLoadingBoards = selectIsLoadingBoards();
@@ -81,7 +85,14 @@ export const CreateBoardForm = () => {
         >
           {t('forms.create')}
         </Button>
-        <Button colorScheme="blue" variant="outline" ml="2" size="sm" disabled={isLoadingBoards}>
+        <Button
+          colorScheme="blue"
+          variant="outline"
+          ml="2"
+          size="sm"
+          disabled={isLoadingBoards}
+          onClick={handleClose}
+        >
           {t('forms.cancel')}
         </Button>
       </ModalFooter>

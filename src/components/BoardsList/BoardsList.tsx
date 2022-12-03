@@ -90,11 +90,16 @@ export const BoardsList = () => {
         </Card>
       ))}
       <Portal
-        title={`${t('boards.delete')} ${deletedBoard?.title}?`}
+        title={t('boards.deleteTitle')}
         handleClose={handleCloseConfirm}
         isOpen={!!deletedBoard}
       >
-        <ConfirmModal confirm={confirmDeleteBoard} isLoading={isLoadingBoards} />
+        <ConfirmModal
+          confirm={confirmDeleteBoard}
+          isLoading={isLoadingBoards}
+          question={`${t('boards.deleteQuestion')} ${deletedBoard?.title}?`}
+          handleClose={handleCloseConfirm}
+        />
       </Portal>
     </Stack>
   );

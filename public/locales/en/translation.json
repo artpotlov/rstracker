@@ -15,10 +15,10 @@
     "send": "Send",
     "create": "Create",
     "cancel": "Cancel",
+    "delete": "Delete",
     "title": "Name",
     "owner": "Owner",
     "users": "Users",
-    "createBoard": "Create board",
     "columnName": "Column name"
   },
   "validateInput": {
@@ -26,7 +26,11 @@
   },
   "boards": {
     "title": "Boards",
-    "delete": "Delete"
+    "delete": "Delete",
+    "noData": "Boards is absent",
+    "create": "Create board",
+    "deleteTitle": "Delete board",
+    "deleteQuestion": "Do you really want to delete the board"
   },
   "footer": {
     "github": {
@@ -42,6 +46,8 @@
     "back": "Back",
     "noData": "Columns is absent",
     "create": "Create column",
-    "delete": "Delete"
+    "delete": "Delete",
+    "deleteTitle": "Delete column",
+    "deleteQuestion": "Do you really want to delete the column"
   }
 }
