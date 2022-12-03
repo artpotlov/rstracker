@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Button, Divider, Flex } from '@chakra-ui/react';
 import { GroupObjectsNew } from '@carbon/icons-react';
@@ -19,6 +19,7 @@ import { getAllUsersThunk } from 'store/users/users.thunk';
 export const Header = () => {
   const { t } = useTranslation();
   const [isCreateBoard, setCreateBoard] = useState(false);
+  const [isScroll, setScroll] = useState(!!scrollY);
   const dispatch = useAppDispatch();
   const { pathname } = useLocation();
   const isBoardPage = new RegExp(`^/${pathRoutes.boards}`).test(pathname);
@@ -36,6 +37,14 @@ export const Header = () => {
     setCreateBoard((prev) => !prev);
   };
 
+  useEffect(() => {
+    const checkScroll = () => {
+      setScroll(!!scrollY);
+    };
+    window.addEventListener('scroll', checkScroll);
+    return () => window.removeEventListener('scroll', checkScroll);
+  }, []);
+
   return (
     <>
       <Flex
@@ -44,7 +53,12 @@ export const Header = () => {
         alignItems="center"
         gap={{ base: 2, sm: 4 }}
         p={4}
-        position={'relative'}
+        position="sticky"
+        top={0}
+        zIndex={10}
+        backgroundColor={isScroll ? 'gray.50' : 'white'}
+        boxShadow={isScroll ? 'md' : 'none'}
+        transition="background-color 0.3s, box-shadow 0.3s"
       >
         <Flex alignItems="center" gap={{ base: 2, sm: 4 }}>
           <Link to={pathRoutes.welcome}>
