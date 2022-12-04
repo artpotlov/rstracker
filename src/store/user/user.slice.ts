@@ -8,11 +8,14 @@ type TAuthUser = IUserData | null;
 
 type TUpdatedUser = TUserSuccess | null;
 
+type TDeletedUser = IUserData | null;
+
 type TInitialState = {
   authUser: TAuthUser;
   isLoading: boolean;
   errorMessage: string;
   updatedUser: TUpdatedUser;
+  deletedUser: TDeletedUser;
 };
 
 const initialState: TInitialState = {
@@ -20,6 +23,7 @@ const initialState: TInitialState = {
   isLoading: false,
   errorMessage: '',
   updatedUser: null,
+  deletedUser: null,
 };
 
 const userSlice = createSlice({
@@ -35,6 +39,9 @@ const userSlice = createSlice({
     },
     setUpdatedUser: (state, { payload }: PayloadAction<TUpdatedUser>) => {
       state.updatedUser = payload;
+    },
+    setDeletedUser: (state, { payload }: PayloadAction<TDeletedUser>) => {
+      state.deletedUser = payload;
     },
   },
 });

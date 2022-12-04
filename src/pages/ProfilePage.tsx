@@ -10,7 +10,7 @@ export const ProfilePage = () => {
     <PageGuard>
       <Container pt="50px" ml={{ base: 'auto', md: '10%' }}>
         <Box maxW="500px" p="26px" boxShadow="md" rounded="md">
-          <Tabs colorScheme="blackAlpha" variant="enclosed">
+          <Tabs variant="enclosed-colored">
             <TabList>
               <Tab fontWeight="medium">{t('forms.edit')}</Tab>
             </TabList>

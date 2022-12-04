@@ -10,3 +10,5 @@ export const selectIsExpiredToken = () => {
 };
 
 export const selectUpdatedUser = () => SelectUser().updatedUser;
+
+export const selectDeletedUser = () => SelectUser().deletedUser;

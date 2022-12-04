@@ -1,19 +1,11 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { updateUserById } from 'api/users';
+import { updateUserById, deleteUserById } from 'api/users';
 import { handleError } from 'api/handleError';
 import { keysLS } from 'shared/consts';
 import { signActions } from 'store/sign/sign.slice';
-import { TUserAuth, TUserCreate } from 'types/types';
-import { getJWTPayloadData } from 'utils/getJWTPayloadData';
-import { setLSData, getLSData } from 'utils/local-storage';
+import { IUserData, TUserCreate } from 'types/types';
+import { getLSData } from 'utils/local-storage';
 import { userActions } from './user.slice';
-
-type TUserData = {
-  login: string;
-  userId: string;
-  token: string;
-  tokenExp: number;
-};
 
 export const updateUserThunk = createAsyncThunk(
   'updateUser',
@@ -24,7 +16,7 @@ export const updateUserThunk = createAsyncThunk(
     dispatch(setUpdatedUser(null));
     dispatch(setLoading(true));
     try {
-      const userId = getLSData<TUserData>(keysLS.userData)?.userId;
+      const userId = getLSData<IUserData>(keysLS.userData)?.userId;
       if (!userId) return;
       const response = await updateUserById({ userId, ...userData });
       dispatch(setUpdatedUser(response.data));
@@ -36,3 +28,22 @@ export const updateUserThunk = createAsyncThunk(
     }
   }
 );
+
+export const deleteUserThunk = createAsyncThunk('deleteUser', async (_, { dispatch }) => {
+  const { setLoading, setError } = signActions;
+  const { logoutUser, setDeletedUser } = userActions;
+  dispatch(setError(''));
+  dispatch(setLoading(true));
+  try {
+    const userId = getLSData<IUserData>(keysLS.userData)?.userId;
+    if (!userId) return;
+    await deleteUserById({ userId });
+    dispatch(setDeletedUser(null));
+    dispatch(logoutUser());
+  } catch (error) {
+    const errorMessage = handleError(error).message;
+    dispatch(setError(errorMessage));
+  } finally {
+    dispatch(setLoading(false));
+  }
+});
