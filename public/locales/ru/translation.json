@@ -30,7 +30,7 @@
     "noData": "Доски отсутствуют",
     "create": "Создать доску",
     "deleteTitle": "Удалние доски",
-    "deleteQuestion": "Вы действительно хотите удалить доску"
+    "deleteQuestion": "Вы действительно хотите удалить доску?"
   },
   "footer": {
     "github": {
@@ -47,7 +47,7 @@
     "noData": "Колонки отсутствуют",
     "create": "Создать колонку",
     "deleteTitle": "Удалние колонки",
-    "deleteQuestion": "Вы действительно хотите удалить колонку"
+    "deleteQuestion": "Вы действительно хотите удалить колонку?"
   },
   "errors": {
     "Authorization error": "Ошибка авторизации",
@@ -55,5 +55,14 @@
     "Invalid token": "Ошибка запроса",
     "Network Error": "Отсутствует подключение к сети",
     "Request failed with status code 404": "Ошибка запроса"
+  },
+  "tasks": {
+    "addButton": "Добавить задачу",
+    "createButton": "Создать",
+    "editButton": "Изменить",
+    "createTitle": "Создание задачи",
+    "editTitle": "Изменение задачи",
+    "deleteTitle": "Удаление задачи",
+    "deleteQuestion": "Вы действительно хотите удалить задачу?"
   }
 }

@@ -29,8 +29,8 @@
     "delete": "Delete",
     "noData": "Boards is absent",
     "create": "Create board",
-    "deleteTitle": "Delete board",
-    "deleteQuestion": "Do you really want to delete the board"
+    "deleteTitle": "Deleting board",
+    "deleteQuestion": "Do you really want to delete the board?"
   },
   "footer": {
     "github": {
@@ -47,8 +47,8 @@
     "noData": "Columns is absent",
     "create": "Create column",
     "delete": "Delete",
-    "deleteTitle": "Delete column",
-    "deleteQuestion": "Do you really want to delete the column"
+    "deleteTitle": "Deleting column",
+    "deleteQuestion": "Do you really want to delete the column?"
   },
   "errors": {
     "Authorization error": "Authorization error",
@@ -56,5 +56,14 @@
     "Invalid token": "Error request",
     "Network Error": "Network error",
     "Request failed with status code 404": "Error request"
+  },
+  "tasks": {
+    "addButton": "Add task",
+    "createButton": "Create",
+    "editButton": "Edit",
+    "createTitle": "Creating task",
+    "editTitle": "Editing task",
+    "deleteTitle": "Deleting task",
+    "deleteQuestion": "Do you want to delete the task?"
   }
 }
