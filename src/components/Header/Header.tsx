@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Button, Divider, Flex } from '@chakra-ui/react';
+import { Button, Flex } from '@chakra-ui/react';
 import { GroupObjectsNew } from '@carbon/icons-react';
 import { RSTrackerLogo } from 'components/Logotype';
 import { LanguageSelect } from 'components/LanguageSelect/LanguageSelect';
@@ -15,11 +15,14 @@ import { useAppDispatch } from 'hooks/useAppDispatch';
 import { Portal } from 'components/Portal/Portal';
 import { CreateBoardForm } from 'components/CreateBoardForm/CreateBoardForm';
 import { getAllUsersThunk } from 'store/users/users.thunk';
+import { useScroll } from 'framer-motion';
+import { ScrollLine } from '../ScrollLine/ScrollLine';
 
 export const Header = () => {
   const { t } = useTranslation();
+  const { scrollY } = useScroll();
   const [isCreateBoard, setCreateBoard] = useState(false);
-  const [isScroll, setScroll] = useState(!!scrollY);
+  const [isScroll, setScroll] = useState(false);
   const dispatch = useAppDispatch();
   const { pathname } = useLocation();
   const isBoardPage = new RegExp(`^/${pathRoutes.boards}`).test(pathname);
@@ -38,11 +41,11 @@ export const Header = () => {
   };
 
   useEffect(() => {
-    const checkScroll = () => {
-      setScroll(!!scrollY);
-    };
-    window.addEventListener('scroll', checkScroll);
-    return () => window.removeEventListener('scroll', checkScroll);
+    scrollY.onChange((latest) => {
+      if (latest > 50) {
+        setScroll(true);
+      }
+    });
   }, []);
 
   return (
@@ -83,8 +86,8 @@ export const Header = () => {
           )}
           {!!authUser && <UserMenu handleLogout={handleLogout} />}
         </Flex>
+        <ScrollLine />
       </Flex>
-      <Divider />
       <Portal title={t('boards.create')} handleClose={toggleCreateBoard} isOpen={isCreateBoard}>
         <CreateBoardForm handleClose={toggleCreateBoard} />
       </Portal>
