@@ -44,9 +44,12 @@ export const Header = () => {
     scrollY.onChange((latest) => {
       if (latest > 50) {
         setScroll(true);
+        return;
       }
+
+      setScroll(false);
     });
-  }, []);
+  }, [scrollY]);
 
   return (
     <>
