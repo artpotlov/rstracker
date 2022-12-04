@@ -48,5 +48,12 @@
     "create": "Создать колонку",
     "deleteTitle": "Удалние колонки",
     "deleteQuestion": "Вы действительно хотите удалить колонку"
+  },
+  "errors": {
+    "Authorization error": "Ошибка авторизации",
+    "Login already exist": "Логин уже зарегистрирован",
+    "Invalid token": "Ошибка запроса",
+    "Network Error": "Отсутствует подключение к сети",
+    "Request failed with status code 404": "Ошибка запроса"
   }
 }

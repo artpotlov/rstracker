@@ -6,16 +6,37 @@ import { Box, Flex } from '@chakra-ui/react';
 import { useAppDispatch } from 'hooks/useAppDispatch';
 import { getAllColumnsThunk } from 'store/columns/columns.thunk';
 import { KanbanColumns } from 'components/KanbanColumns/KanbanColumns';
+import { useTranslation } from 'react-i18next';
+import { useAppToast } from 'hooks/useAppToast';
+import { selectErrorBoards } from 'store/boards/boards.selectors';
+import { selectErrorColumns } from 'store/columns/columns.selectors';
+import { boardsActions } from 'store/boards/boards.slice';
+import { columnsActions } from 'store/columns/columns.slice';
 
 export const BoardPage = () => {
   const dispatch = useAppDispatch();
   const { id } = useParams();
+  const { t } = useTranslation();
+  const toast = useAppToast();
+  const errorBoards = selectErrorBoards();
+  const errorColumns = selectErrorColumns();
 
   useEffect(() => {
     if (id) {
       dispatch(getAllColumnsThunk(id));
     }
   }, [id, dispatch]);
+
+  useEffect(() => {
+    if (errorBoards) {
+      toast('error', t(`errors.${errorBoards}`));
+      dispatch(boardsActions.setError(''));
+    }
+    if (errorColumns) {
+      toast('error', t(`errors.${errorColumns}`));
+      dispatch(columnsActions.setError(''));
+    }
+  }, [errorBoards, errorColumns, toast, t, dispatch]);
 
   return (
     <PageGuard>

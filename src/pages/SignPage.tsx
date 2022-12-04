@@ -3,10 +3,13 @@ import { Navigate } from 'react-router-dom';
 import { Box, Container, Tab, TabList, TabPanel, TabPanels, Tabs } from '@chakra-ui/react';
 import { SignInForm } from 'components/SignInForm/SignInForm';
 import { SignUpForm } from 'components/SignUpForm/SignUpForm';
-import { selectCreatedUserSign } from 'store/sign/sign.selectors';
+import { selectCreatedUserSign, selectErrorSign } from 'store/sign/sign.selectors';
 import { pathRoutes } from 'router/router';
 import { selectAuthUser } from 'store/user/user.selectors';
 import { useTranslation } from 'react-i18next';
+import { useAppToast } from 'hooks/useAppToast';
+import { useAppDispatch } from 'hooks/useAppDispatch';
+import { signActions } from 'store/sign/sign.slice';
 
 export const signTabs = {
   signIn: { tab: 'signIn', label: 'Sign In', value: 0 },
@@ -16,8 +19,12 @@ export const signTabs = {
 export const SignPage = () => {
   const { t } = useTranslation();
   const createdUser = selectCreatedUserSign();
+  const errorSign = selectErrorSign();
   const authUser = selectAuthUser();
   const [tabIndex, setTabIndex] = useState(signTabs.signIn.value);
+  const toast = useAppToast();
+  const dispatch = useAppDispatch();
+  const { setError } = signActions;
 
   const handleTabsChange = (index: number) => {
     setTabIndex(index);
@@ -28,6 +35,13 @@ export const SignPage = () => {
       handleTabsChange(signTabs.signIn.value);
     }
   }, [createdUser]);
+
+  useEffect(() => {
+    if (errorSign) {
+      toast('error', t(`errors.${errorSign}`));
+      dispatch(setError(''));
+    }
+  }, [errorSign, toast, t, dispatch, setError]);
 
   if (authUser) {
     return <Navigate to={`/${pathRoutes.boards}`} replace />;

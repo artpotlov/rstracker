@@ -49,5 +49,12 @@
     "delete": "Delete",
     "deleteTitle": "Delete column",
     "deleteQuestion": "Do you really want to delete the column"
+  },
+  "errors": {
+    "Authorization error": "Authorization error",
+    "Login already exist": "Login already exist",
+    "Invalid token": "Error request",
+    "Network Error": "Network error",
+    "Request failed with status code 404": "Error request"
   }
 }
