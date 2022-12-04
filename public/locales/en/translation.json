@@ -19,7 +19,9 @@
     "title": "Name",
     "owner": "Owner",
     "users": "Users",
-    "columnName": "Column name"
+    "columnName": "Column name",
+    "taskName": "Task name",
+    "taskDescription": "Task description"
   },
   "validateInput": {
     "required": "It`s required field"
@@ -64,6 +66,8 @@
     "createTitle": "Creating task",
     "editTitle": "Editing task",
     "deleteTitle": "Deleting task",
-    "deleteQuestion": "Do you want to delete the task"
+    "deleteQuestion": "Do you want to delete the task",
+    "author": "Task author",
+    "users": "Participants"
   }
 }
