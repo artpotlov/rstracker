@@ -30,7 +30,7 @@
     "noData": "Boards is absent",
     "create": "Create board",
     "deleteTitle": "Deleting board",
-    "deleteQuestion": "Do you really want to delete the board?"
+    "deleteQuestion": "Do you really want to delete the board"
   },
   "footer": {
     "github": {
@@ -48,7 +48,7 @@
     "create": "Create column",
     "delete": "Delete",
     "deleteTitle": "Deleting column",
-    "deleteQuestion": "Do you really want to delete the column?"
+    "deleteQuestion": "Do you really want to delete the column"
   },
   "errors": {
     "Authorization error": "Authorization error",
@@ -64,6 +64,6 @@
     "createTitle": "Creating task",
     "editTitle": "Editing task",
     "deleteTitle": "Deleting task",
-    "deleteQuestion": "Do you want to delete the task?"
+    "deleteQuestion": "Do you want to delete the task"
   }
 }
