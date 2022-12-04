@@ -1,4 +1,4 @@
-import { Button, Box } from '@chakra-ui/react';
+import { Button, Box, Flex } from '@chakra-ui/react';
 import { FormProvider, useForm } from 'react-hook-form';
 import { selectUpdatedUser } from 'store/user/user.selectors';
 import { useAppDispatch } from 'hooks/useAppDispatch';
@@ -68,9 +68,14 @@ export const EditProfileForm = () => {
             placeholder={t('forms.editPasswordPlaceholder')}
           />
         </FormControlBase>
-        <Button colorScheme="blue" mt={4} size="sm" isLoading={isLoading} type="submit">
-          {t('forms.send')}
-        </Button>
+        <Flex columnGap="4" justifyContent="space-between" flexWrap="wrap">
+          <Button colorScheme="blue" mt={4} size="sm" isLoading={isLoading} type="submit">
+            {t('forms.send')}
+          </Button>
+          <Button colorScheme="red" mt={4} size="sm" isLoading={isLoading} type="button">
+            {t('user.delete')}
+          </Button>
+        </Flex>
       </Box>
     </FormProvider>
   );

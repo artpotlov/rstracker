@@ -120,5 +120,9 @@
         }
       }
     }
+  },
+  "user": {
+    "delete": "Delete user",
+    "deleteQuestion": "Do you really want to delete the user"
   }
 }
