@@ -42,12 +42,7 @@ export const Header = () => {
 
   useEffect(() => {
     scrollY.onChange((latest) => {
-      if (latest > 50) {
-        setScroll(true);
-        return;
-      }
-
-      setScroll(false);
+      setScroll(latest > 50);
     });
   }, [scrollY]);
 
