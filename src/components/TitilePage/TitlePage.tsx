@@ -8,10 +8,10 @@ export const TitlePage = ({ title, ...props }: TTitlePageProps & HeadingProps) =
   return (
     <Heading
       as="h1"
-      my={4}
+      mb={4}
       textTransform="capitalize"
       color="gray.700"
-      size="xl"
+      size="lg"
       noOfLines={1}
       {...props}
     >

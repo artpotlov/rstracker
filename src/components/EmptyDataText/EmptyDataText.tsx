@@ -5,5 +5,9 @@ type TEmptyDataTextProps = {
 };
 
 export const EmptyDataText = ({ text }: TEmptyDataTextProps) => {
-  return <Box textAlign="center">{text}</Box>;
+  return (
+    <Box py={2} textAlign="center">
+      {text}
+    </Box>
+  );
 };

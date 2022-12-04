@@ -37,8 +37,8 @@ export const KanbanHeader = () => {
         </Flex>
         <Flex gap={4}></Flex>
       </Box>
-      <Portal title={''} isOpen={isCreateColumn} handleClose={handleTogglePortal}>
-        <CreateColumnForm />
+      <Portal title={t('columns.create')} isOpen={isCreateColumn} handleClose={handleTogglePortal}>
+        <CreateColumnForm handleClose={handleTogglePortal} />
       </Portal>
     </>
   );

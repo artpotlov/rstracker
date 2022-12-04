@@ -24,6 +24,8 @@ import { useNavigate } from 'react-router-dom';
 import { pathRoutes } from 'router/router';
 import { deleteBoardThunk } from 'store/boards/boards.thunk';
 import { ConfirmModal } from 'components/ConfirmModal/ConfirmModal';
+import { LoaderPage } from 'components/LoaderPage/LoaderPage';
+import { EmptyDataText } from 'components/EmptyDataText/EmptyDataText';
 
 export const BoardsList = () => {
   const { t } = useTranslation();
@@ -52,6 +54,14 @@ export const BoardsList = () => {
       dispatch(deleteBoardThunk(deletedBoard));
     }
   };
+
+  if (isLoadingBoards) {
+    return <LoaderPage />;
+  }
+
+  if (!allBoards.length) {
+    return <EmptyDataText text={t('boards.noData')} />;
+  }
 
   return (
     <Stack spacing="4" mt={4}>
@@ -90,11 +100,16 @@ export const BoardsList = () => {
         </Card>
       ))}
       <Portal
-        title={`${t('boards.delete')} ${deletedBoard?.title}?`}
+        title={t('boards.deleteTitle')}
         handleClose={handleCloseConfirm}
         isOpen={!!deletedBoard}
       >
-        <ConfirmModal confirm={confirmDeleteBoard} isLoading={isLoadingBoards} />
+        <ConfirmModal
+          confirm={confirmDeleteBoard}
+          isLoading={isLoadingBoards}
+          question={`${t('boards.deleteQuestion')} ${deletedBoard?.title}?`}
+          handleClose={handleCloseConfirm}
+        />
       </Portal>
     </Stack>
   );

@@ -13,6 +13,10 @@ import {
 } from 'store/columns/columns.selectors';
 import { createColumnThunk } from 'store/columns/columns.thunk';
 
+type TCreateColumnFormProps = {
+  handleClose: () => void;
+};
+
 type TValuesForm = {
   title: string;
 };
@@ -21,7 +25,7 @@ const defaultValuesForm: TValuesForm = {
   title: '',
 };
 
-export const CreateColumnForm = () => {
+export const CreateColumnForm = ({ handleClose }: TCreateColumnFormProps) => {
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
   const isUploadingColumns = selectIsUploadingColumns();
@@ -69,6 +73,16 @@ export const CreateColumnForm = () => {
           isLoading={isUploadingColumns}
         >
           {t('forms.create')}
+        </Button>
+        <Button
+          colorScheme="blue"
+          variant="outline"
+          ml="2"
+          size="sm"
+          disabled={isUploadingColumns}
+          onClick={handleClose}
+        >
+          {t('forms.cancel')}
         </Button>
       </ModalFooter>
     </FormProvider>
