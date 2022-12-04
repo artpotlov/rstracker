@@ -7,7 +7,7 @@ export const App = () => {
   return (
     <Flex minH="100vh" flexDirection="column">
       <Header />
-      <Box as="main" flexGrow="1">
+      <Box as="main" flexGrow="1" position="relative">
         <Outlet />
       </Box>
       <Footer />

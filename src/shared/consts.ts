@@ -8,3 +8,8 @@ export const GITHUB_LINKS = {
 export const keysLS = {
   userData: 'userData',
 };
+
+export const DRAGGABLE_TYPES = {
+  column: 'column',
+  task: 'task',
+};

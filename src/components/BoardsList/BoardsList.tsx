@@ -12,16 +12,22 @@ import {
 } from '@chakra-ui/react';
 import { Portal } from 'components/Portal/Portal';
 import { useTranslation } from 'react-i18next';
-import { selectAllBoards, selectDeletedBoard } from 'store/boards/boards.selectors';
+import {
+  selectAllBoards,
+  selectDeletedBoard,
+  selectIsLoadingBoards,
+} from 'store/boards/boards.selectors';
 import { TBoardSuccess } from 'types/types';
-import { ConfirmDeleteBoard } from 'components/ConfirmDeleteBoard/ConfirmDeleteBoard';
 import { useAppDispatch } from 'hooks/useAppDispatch';
 import { boardsActions } from 'store/boards/boards.slice';
 import { useNavigate } from 'react-router-dom';
 import { pathRoutes } from 'router/router';
+import { deleteBoardThunk } from 'store/boards/boards.thunk';
+import { ConfirmModal } from 'components/ConfirmModal/ConfirmModal';
 
 export const BoardsList = () => {
   const { t } = useTranslation();
+  const isLoadingBoards = selectIsLoadingBoards();
   const allBoards = selectAllBoards();
   const deletedBoard = selectDeletedBoard();
   const dispatch = useAppDispatch();
@@ -39,6 +45,12 @@ export const BoardsList = () => {
 
   const handleClickBoard = (boardId: string) => {
     navigate(`/${pathRoutes.boards}/${boardId}`);
+  };
+
+  const confirmDeleteBoard = () => {
+    if (deletedBoard) {
+      dispatch(deleteBoardThunk(deletedBoard));
+    }
   };
 
   return (
@@ -82,7 +94,7 @@ export const BoardsList = () => {
         handleClose={handleCloseConfirm}
         isOpen={!!deletedBoard}
       >
-        <ConfirmDeleteBoard />
+        <ConfirmModal confirm={confirmDeleteBoard} isLoading={isLoadingBoards} />
       </Portal>
     </Stack>
   );
