@@ -34,8 +34,9 @@ export const Searching = () => {
         position={'relative'}
         zIndex="10"
         onClick={handleOpenSearch}
-        icon={isOpenSearch ? <Close size="24" /> : <Search size="24" />}
-      />
+      >
+        {isOpenSearch ? <Close size="24" /> : <Search size="24" />}
+      </IconButtonBase>
     </>
   );
 };

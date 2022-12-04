@@ -36,12 +36,7 @@ export const SignPage = () => {
   return (
     <Container pt="50px" ml={{ base: 'auto', md: '10%' }}>
       <Box maxW="500px" px="10px" boxShadow="md" rounded="md">
-        <Tabs
-          index={tabIndex}
-          onChange={handleTabsChange}
-          colorScheme="blackAlpha"
-          variant="enclosed"
-        >
+        <Tabs index={tabIndex} onChange={handleTabsChange} variant="enclosed-colored">
           <TabList>
             <Tab fontWeight="medium">{t('forms.signIn')}</Tab>
             <Tab fontWeight="medium">{t('forms.signUp')}</Tab>
