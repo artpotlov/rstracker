@@ -55,5 +55,14 @@
     "Invalid token": "Ошибка запроса",
     "Network Error": "Отсутствует подключение к сети",
     "Request failed with status code 404": "Ошибка запроса"
+  },
+  "tasks": {
+    "addButton": "Добавить задачу",
+    "createButton": "Создать",
+    "editButton": "Изменить",
+    "createTitle": "Создание задачи",
+    "editTitle": "Изменение задачи",
+    "deleteTitle": "Удаление задачи",
+    "deleteQuestion": "Вы действительно хотите удалить задачу"
   }
 }
