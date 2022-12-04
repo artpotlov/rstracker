@@ -7,6 +7,10 @@
     "search": "Search"
   },
   "forms": {
+    "edit": "Edit profile",
+    "editNamePlaceholder": "Your new name",
+    "editLoginPlaceholder": "Your new login",
+    "editPasswordPlaceholder": "Your new password",
     "signIn": "Sign in",
     "signUp": "Sign up",
     "name": "Name",
