@@ -60,7 +60,6 @@
   },
   "tasks": {
     "addButton": "Добавить задачу",
-    "createButton": "Создать",
     "editButton": "Изменить",
     "createTitle": "Создание задачи",
     "editTitle": "Изменение задачи",

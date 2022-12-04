@@ -31,7 +31,7 @@ export const CreateColumnForm = ({ handleClose }: TCreateColumnFormProps) => {
   const isUploadingColumns = selectIsUploadingColumns();
   const createdColumn = selectCreatedColumn();
   const board = selectBoard();
-  const orederNewColumn = selectOrderNewColumn();
+  const orderNewColumn = selectOrderNewColumn();
 
   const methodsForm = useForm<TValuesForm>({ defaultValues: defaultValuesForm });
 
@@ -43,7 +43,7 @@ export const CreateColumnForm = ({ handleClose }: TCreateColumnFormProps) => {
 
   const onSubmit = ({ title }: TValuesForm) => {
     if (!board) return;
-    dispatch(createColumnThunk({ boardId: board._id, order: orederNewColumn, title }));
+    dispatch(createColumnThunk({ boardId: board._id, order: orderNewColumn, title }));
   };
 
   useEffect(() => {
