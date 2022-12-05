@@ -102,18 +102,18 @@
       "teams": {
         "artpotlov": {
           "name": "Artem Potlov",
-          "position": "Team lead, developer",
-          "description": "Тимлидил проект"
+          "position": "Team lead, front-end developer",
+          "description": "I teamed the project, prepared the repository, configured CI/CD, deployed the server for the team. Developed the main page, part of modal windows, participated in the implementation of the API, the creation of a config for the localization of the project"
         },
         "tonKristall": {
           "name": "Alexander Shustov",
-          "position": "Developer",
-          "description": "Разрабатывал проект"
+          "position": "Front-end developer",
+          "description": "Developed an application store, created application pages, modal windows and implemented the main part - kanban board"
         },
         "slavaShchipunov": {
-          "name": "Svyatoslav Shchipunov",
-          "position": "Developer",
-          "description": "Разрабатывал проект"
+          "name": "Slava Shchipunov",
+          "position": "Front-end developer",
+          "description": "Participated in the creation of the API, implemented the user edit page and authorization"
         }
       }
     }
