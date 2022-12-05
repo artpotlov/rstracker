@@ -11,17 +11,13 @@ export const selectAllTasksBoard = () => SelectTasks().allTasksBoard;
 export const selectCreatedTask = () => SelectTasks().createdTask;
 export const selectDeletedTask = () => SelectTasks().deletedTask;
 
-export const selectOrderNewTask = createSelector(
-  [selectAllTasksBoard, (columnId) => columnId],
-  (allTasksBoard, columnId) => {
-    const tasksColumn = allTasksBoard.filter((task) => task.columnId === columnId);
-    return tasksColumn.length ? allTasksBoard[allTasksBoard.length - 1].order + 1 : 1;
-  }
-);
+export const selectOrderNewTask = (columnId: string) => {
+  const allTasksBoard = selectAllTasksBoard();
+  const tasksColumn = allTasksBoard.filter((task) => task.columnId === columnId);
+  return tasksColumn.length ? allTasksBoard[allTasksBoard.length - 1].order + 1 : 1;
+};
 
-export const selectTaskColumn = createSelector(
-  [selectAllTasksBoard, (columnId) => columnId],
-  (allTasksBoard, columnId) => {
-    return allTasksBoard.filter((task) => task.columnId === columnId);
-  }
-);
+export const selectTaskColumn = (columnId: string) => {
+  const allTasksBoard = selectAllTasksBoard();
+  return allTasksBoard.filter((task) => task.columnId === columnId);
+};

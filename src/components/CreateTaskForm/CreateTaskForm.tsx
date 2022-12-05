@@ -41,7 +41,7 @@ const defaultValuesForm: TValuesForm = {
 export const CreateTaskForm = ({ columnId, handleClose }: TCreateBoardFormProps) => {
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
-  const isLoadingTasks = selectIsUploadingTasks();
+  const isUpLoadingTasks = selectIsUploadingTasks();
   const createdTask = selectCreatedTask();
   const boardUsersOptions = selectBoardUsersOptions();
   const authUser = selectAuthUser();
@@ -100,7 +100,7 @@ export const CreateTaskForm = ({ columnId, handleClose }: TCreateBoardFormProps)
           size="sm"
           type="submit"
           form="createTask"
-          isLoading={isLoadingTasks}
+          isLoading={isUpLoadingTasks}
         >
           {t('forms.create')}
         </Button>
@@ -109,7 +109,7 @@ export const CreateTaskForm = ({ columnId, handleClose }: TCreateBoardFormProps)
           variant="outline"
           ml="2"
           size="sm"
-          disabled={isLoadingTasks}
+          disabled={isUpLoadingTasks}
           onClick={handleClose}
         >
           {t('forms.cancel')}
