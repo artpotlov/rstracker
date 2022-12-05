@@ -2,15 +2,28 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { IUserData } from 'types/types';
 import { deleteLSData, getLSData } from 'utils/local-storage';
 import { keysLS } from 'shared/consts';
+import { TUserSuccess } from 'types/types';
 
 type TAuthUser = IUserData | null;
 
+type TUpdatedUser = TUserSuccess | null;
+
+type TDeletedUser = IUserData | null;
+
 type TInitialState = {
   authUser: TAuthUser;
+  isLoading: boolean;
+  errorMessage: string;
+  updatedUser: TUpdatedUser;
+  deletedUser: TDeletedUser;
 };
 
 const initialState: TInitialState = {
   authUser: getLSData<IUserData>(keysLS.userData),
+  isLoading: false,
+  errorMessage: '',
+  updatedUser: null,
+  deletedUser: null,
 };
 
 const userSlice = createSlice({
@@ -23,6 +36,12 @@ const userSlice = createSlice({
     logoutUser(state) {
       deleteLSData(keysLS.userData);
       state.authUser = null;
+    },
+    setUpdatedUser: (state, { payload }: PayloadAction<TUpdatedUser>) => {
+      state.updatedUser = payload;
+    },
+    setDeletedUser: (state, { payload }: PayloadAction<TDeletedUser>) => {
+      state.deletedUser = payload;
     },
   },
 });

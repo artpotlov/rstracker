@@ -7,10 +7,16 @@
     "search": "Search"
   },
   "forms": {
+    "edit": "Edit profile",
+    "editNamePlaceholder": "Your new name",
+    "editLoginPlaceholder": "Your new login",
+    "editPasswordPlaceholder": "Your new password",
+    "passwordPlaceholder": "Your password",
     "signIn": "Sign in",
     "signUp": "Sign up",
     "name": "Name",
     "login": "Login",
+    "newPassword": "New password",
     "password": "Password",
     "send": "Send",
     "create": "Create",
@@ -119,5 +125,9 @@
         }
       }
     }
+  },
+  "user": {
+    "delete": "Delete user",
+    "deleteQuestion": "Do you really want to delete the user"
   }
 }

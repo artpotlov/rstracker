@@ -7,10 +7,16 @@
     "search": "Поиск"
   },
   "forms": {
+    "edit": "Редактировать профиль",
+    "editNamePlaceholder": "Ваше новое имя",
+    "editLoginPlaceholder": "Ваш новый логин",
+    "editPasswordPlaceholder": "Ваш новый пароль",
+    "passwordPlaceholder": "Ваш пароль",
     "signIn": "Вход",
     "signUp": "Регистрация",
     "name": "Имя",
     "login": "Логин",
+    "newPassword": "Новый пароль",
     "password": "Пароль",
     "send": "Отправить",
     "create": "Создать",
@@ -118,5 +124,9 @@
         }
       }
     }
+  },
+  "user": {
+    "delete": "Удалить пользователя",
+    "deleteQuestion": "Вы действительно хотите удалить пользователя"
   }
 }

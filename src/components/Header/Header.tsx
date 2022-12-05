@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
-import { Link, useLocation } from 'react-router-dom';
 import { Button, Flex } from '@chakra-ui/react';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { GroupObjectsNew } from '@carbon/icons-react';
 import { RSTrackerLogo } from 'components/Logotype';
 import { LanguageSelect } from 'components/LanguageSelect/LanguageSelect';
@@ -25,12 +25,17 @@ export const Header = () => {
   const [isScroll, setScroll] = useState(false);
   const dispatch = useAppDispatch();
   const { pathname } = useLocation();
+  const navigate = useNavigate();
   const isBoardPage = new RegExp(`^/${pathRoutes.boards}`).test(pathname);
   const { logoutUser } = userActions;
   const authUser = selectAuthUser();
 
   const handleLogout = () => {
     dispatch(logoutUser());
+  };
+
+  const handleEdit = () => {
+    navigate(pathRoutes.profile);
   };
 
   const toggleCreateBoard = () => {
@@ -82,7 +87,7 @@ export const Header = () => {
               </Button>
             </Link>
           )}
-          {!!authUser && <UserMenu handleLogout={handleLogout} />}
+          {!!authUser && <UserMenu handleLogout={handleLogout} handleEdit={handleEdit} />}
         </Flex>
         <ScrollLine />
       </Flex>
