@@ -61,7 +61,6 @@
   },
   "tasks": {
     "addButton": "Add task",
-    "createButton": "Create",
     "editButton": "Edit",
     "createTitle": "Creating task",
     "editTitle": "Editing task",

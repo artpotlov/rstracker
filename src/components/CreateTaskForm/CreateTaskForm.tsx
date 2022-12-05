@@ -5,13 +5,19 @@ import { useAppDispatch } from 'hooks/useAppDispatch';
 import { FormControlBase } from 'components/FormControlBase/FormControlBase';
 import { ControlInputBase } from 'components/ControlInputBase/ControlInputBase';
 import { useTranslation } from 'react-i18next';
-import { selectCreatedBoard, selectIsLoadingBoards } from 'store/boards/boards.selectors';
-import { selectAllUsersOptions } from 'store/users/users.selectors';
+import {
+  selectCreatedTask,
+  selectIsUploadingTasks,
+  selectOrderNewTask,
+} from 'store/tasks/tasks.selectors';
+import { selectBoard, selectBoardUsersOptions } from 'store/columns/columns.selectors';
+import { createTaskThunk } from 'store/tasks/tasks.thunk';
 import { ControlSelectBase } from 'components/ControlSelectBase/ControlSelectBase';
 import { selectAuthUser } from 'store/user/user.selectors';
 import { ControlTextareaBase } from '../ControlTextareaBase/ControlTextareaBase';
 
 type TCreateBoardFormProps = {
+  columnId: string;
   handleClose: () => void;
 };
 
@@ -23,31 +29,24 @@ type TUsersForm = {
 type TValuesForm = {
   title: string;
   description: string;
-  userId: string;
   users: TUsersForm[];
-  boardId: string;
-  columnId: string;
-  order: number;
 };
 
 const defaultValuesForm: TValuesForm = {
-  // TODO сделать запрос в стейт для дефолтных значений (понадобится для редактирования задачи)
   title: '',
   description: '',
-  userId: '',
   users: [],
-  boardId: '',
-  columnId: '',
-  order: 0,
 };
 
-export const CreateTaskForm = ({ handleClose }: TCreateBoardFormProps) => {
+export const CreateTaskForm = ({ columnId, handleClose }: TCreateBoardFormProps) => {
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
-  const isLoadingTasks = selectIsLoadingBoards(); // TODO Изменить сеслектор
-  const createdTask = selectCreatedBoard(); // TODO Изменить селектор
-  const allUsersOptions = selectAllUsersOptions();
+  const isLoadingTasks = selectIsUploadingTasks();
+  const createdTask = selectCreatedTask();
+  const boardUsersOptions = selectBoardUsersOptions();
   const authUser = selectAuthUser();
+  const orderNewTask = selectOrderNewTask(columnId);
+  const board = selectBoard();
 
   const methodsForm = useForm<TValuesForm>({ defaultValues: defaultValuesForm });
 
@@ -58,10 +57,11 @@ export const CreateTaskForm = ({ handleClose }: TCreateBoardFormProps) => {
   } = methodsForm;
 
   const onSubmit = (data: TValuesForm) => {
-    const owner = authUser?.login || '';
+    if (!authUser || !board) return;
+    const userId = authUser.login;
+    const boardId = board._id;
     const users = data.users.map((user) => user.value);
-    // TODO добавить вызов диспатчера
-    // dispatch(createTaskThunk({});
+    dispatch(createTaskThunk({ ...data, users, userId, order: orderNewTask, boardId, columnId }));
   };
 
   useEffect(() => {
@@ -90,7 +90,7 @@ export const CreateTaskForm = ({ handleClose }: TCreateBoardFormProps) => {
             />
           </FormControlBase>
           <FormControlBase label={t('forms.users')} errorMessage={errors.users?.message}>
-            <ControlSelectBase name="users" options={allUsersOptions} isMulti />
+            <ControlSelectBase name="users" options={boardUsersOptions} isMulti />
           </FormControlBase>
         </Box>
       </ModalBody>
@@ -102,7 +102,7 @@ export const CreateTaskForm = ({ handleClose }: TCreateBoardFormProps) => {
           form="createTask"
           isLoading={isLoadingTasks}
         >
-          {t('tasks.createButton')}
+          {t('forms.create')}
         </Button>
         <Button
           colorScheme="blue"

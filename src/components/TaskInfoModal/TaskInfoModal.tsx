@@ -1,7 +1,13 @@
-import { Box, Flex, ModalBody, Stack, Text } from '@chakra-ui/react';
+import { Box, Button, Flex, ModalBody, ModalFooter, Stack, Text } from '@chakra-ui/react';
 import { useTranslation } from 'react-i18next';
+import { TTasksSuccess } from 'types/types';
 
-export const TaskInfoModal = () => {
+type TTaskInfoModalPropps = {
+  task: TTasksSuccess;
+  handleDelete: () => void;
+};
+
+export const TaskInfoModal = ({ task, handleDelete }: TTaskInfoModalPropps) => {
   const { t } = useTranslation();
 
   return (
@@ -9,23 +15,32 @@ export const TaskInfoModal = () => {
       <ModalBody>
         <Stack spacing={4}>
           <Text as="b">{t('forms.taskDescription')}</Text>
-          <Text>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequatur cupiditate
-            delectus deserunt, dicta dolores enim fuga hic id laudantium maxime natus odio quam
-            reiciendis tenetur voluptatum. Beatae culpa minima similique?
-          </Text>
-          <Flex flexWrap="wrap" gap={4}>
-            <Box as="div">
+          <Text>{task.description}</Text>
+          <Flex w="100%" flexWrap="wrap" gap={4}>
+            <Box as="div" maxW="100%">
               <Text as="b">{t('tasks.author')}</Text>
-              <Text>User name</Text>
+              <Text>{task.userId}</Text>
             </Box>
-            <Box as="div">
-              <Text as="b">{t('tasks.users')}</Text>
-              <Text>User name, user name</Text>
-            </Box>
+            {!!task.users.length && (
+              <Box as="div" maxW="100%">
+                <Text as="b">{t('tasks.users')}</Text>
+                <Text>{task.users.join(', ')}</Text>
+              </Box>
+            )}
           </Flex>
         </Stack>
       </ModalBody>
+      <ModalFooter>
+        <Button
+          colorScheme="red"
+          opacity={'0.9'}
+          variant={'outline'}
+          size="sm"
+          onClick={handleDelete}
+        >
+          {t('forms.delete')}
+        </Button>
+      </ModalFooter>
     </>
   );
 };

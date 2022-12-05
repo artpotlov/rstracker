@@ -79,6 +79,7 @@ export const moveColumnThunk = createAsyncThunk<unknown, TColumnSuccess[], { sta
   'moveColumn',
   async (newColumn, { dispatch, getState }) => {
     const { setUploading, setError, setAllColumns } = columnsActions;
+    const oldColumns = getState().columns.allColumns;
     dispatch(setAllColumns(newColumn));
     dispatch(setError(''));
     dispatch(setUploading(true));
@@ -86,7 +87,6 @@ export const moveColumnThunk = createAsyncThunk<unknown, TColumnSuccess[], { sta
       const sendData = newColumn.map((column, index) => ({ _id: column._id, order: index + 1 }));
       await updateOrdersInColumns(sendData);
     } catch (error) {
-      const oldColumns = getState().columns.allColumns;
       const errorMessage = handleError(error).message;
       dispatch(setError(errorMessage));
       dispatch(setAllColumns(oldColumns));

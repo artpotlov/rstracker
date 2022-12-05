@@ -14,3 +14,8 @@ export const selectOrderNewColumn = () => {
   const allColumns = selectAllColumns();
   return allColumns.length ? allColumns[allColumns.length - 1].order + 1 : 1;
 };
+
+export const selectBoardUsersOptions = () => {
+  const board = selectBoard();
+  return board?.users.map((user) => ({ label: user, value: user })) || [];
+};
