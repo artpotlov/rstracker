@@ -1,4 +1,3 @@
-import { createSelector } from '@reduxjs/toolkit';
 import { useAppSelector } from 'hooks/useAppSelector';
 
 const SelectTasks = () => useAppSelector((state) => state.tasks);
