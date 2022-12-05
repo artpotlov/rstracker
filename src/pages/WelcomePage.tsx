@@ -40,7 +40,7 @@ export const WelcomePage = () => {
             alt="RS Tracker"
           />
           <Flex justifyContent="center" gap={4}>
-            <Link href={pathRoutes.boards} _hover={{ textDecoration: 'none' }}>
+            <Link href={pathRoutes.sign} _hover={{ textDecoration: 'none' }}>
               <Button colorScheme="green" size="lg">
                 {t('sectionOne.buttonStart')}
               </Button>
