@@ -74,7 +74,7 @@ export const ColumnBoard = ({ column, index }: TColumnBoardProps) => {
                 onClick={handleToggleTaskModal}
               >
                 <AddAlt size={24} />
-                <Text pl={2}>Добавить задачу</Text>
+                <Text pl={2}>{t('tasks.addButton')}</Text>
               </Button>
             </CardFooter>
           </Card>
