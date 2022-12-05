@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { Button, Box, ModalFooter, ModalBody } from '@chakra-ui/react';
+import { Box, Button, ModalBody, ModalFooter } from '@chakra-ui/react';
 import { FormProvider, useForm } from 'react-hook-form';
 import { useAppDispatch } from 'hooks/useAppDispatch';
 import { FormControlBase } from 'components/FormControlBase/FormControlBase';
@@ -12,6 +12,8 @@ import {
   selectOrderNewColumn,
 } from 'store/columns/columns.selectors';
 import { createColumnThunk } from 'store/columns/columns.thunk';
+import { useAppToast } from '../../hooks/useAppToast';
+import { columnsActions } from '../../store/columns/columns.slice';
 
 type TCreateColumnFormProps = {
   handleClose: () => void;
@@ -32,6 +34,8 @@ export const CreateColumnForm = ({ handleClose }: TCreateColumnFormProps) => {
   const createdColumn = selectCreatedColumn();
   const board = selectBoard();
   const orderNewColumn = selectOrderNewColumn();
+  const toast = useAppToast();
+  const { clearColumn } = columnsActions;
 
   const methodsForm = useForm<TValuesForm>({ defaultValues: defaultValuesForm });
 
@@ -49,8 +53,13 @@ export const CreateColumnForm = ({ handleClose }: TCreateColumnFormProps) => {
   useEffect(() => {
     if (createdColumn) {
       reset();
+      toast('success', '', t('columns.successRequest'));
     }
-  }, [createdColumn, reset]);
+
+    return () => {
+      dispatch(clearColumn());
+    };
+  }, [createdColumn, reset, t, toast, clearColumn, dispatch]);
 
   return (
     <FormProvider {...methodsForm}>

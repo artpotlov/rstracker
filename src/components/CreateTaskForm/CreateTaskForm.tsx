@@ -15,6 +15,8 @@ import { createTaskThunk } from 'store/tasks/tasks.thunk';
 import { ControlSelectBase } from 'components/ControlSelectBase/ControlSelectBase';
 import { selectAuthUser } from 'store/user/user.selectors';
 import { ControlTextareaBase } from '../ControlTextareaBase/ControlTextareaBase';
+import { useAppToast } from '../../hooks/useAppToast';
+import { tasksActions } from '../../store/tasks/tasks.slice';
 
 type TCreateBoardFormProps = {
   columnId: string;
@@ -47,6 +49,8 @@ export const CreateTaskForm = ({ columnId, handleClose }: TCreateBoardFormProps)
   const authUser = selectAuthUser();
   const orderNewTask = selectOrderNewTask(columnId);
   const board = selectBoard();
+  const toast = useAppToast();
+  const { clearTask } = tasksActions;
 
   const methodsForm = useForm<TValuesForm>({ defaultValues: defaultValuesForm });
 
@@ -67,8 +71,13 @@ export const CreateTaskForm = ({ columnId, handleClose }: TCreateBoardFormProps)
   useEffect(() => {
     if (createdTask) {
       reset();
+      toast('success', '', t('tasks.successRequest'));
     }
-  }, [createdTask, reset]);
+
+    return () => {
+      dispatch(clearTask());
+    };
+  }, [createdTask, reset, t, toast, dispatch, clearTask]);
 
   return (
     <FormProvider {...methodsForm}>

@@ -49,6 +49,9 @@ const tasksSlice = createSlice({
     deleteTask: (state, { payload }: PayloadAction<TTasksSuccess>) => {
       state.allTasksBoard = state.allTasksBoard.filter((task) => task._id !== payload._id);
     },
+    clearTask: (state) => {
+      state.createdTask = null;
+    },
   },
 });
 
