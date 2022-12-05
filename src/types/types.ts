@@ -57,6 +57,10 @@ export type TUserCreate = Omit<TUser, '_id'>;
 
 export type TUserAuth = Omit<TUser, '_id' | 'name'>;
 
+export type TUserEdit = {
+  newPassword: string;
+} & Omit<TUser, '_id'>;
+
 export type TColumnSuccess = {
   _id: string;
   title: string;

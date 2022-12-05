@@ -1,15 +1,16 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { updateUserById, deleteUserById } from 'api/users';
+import { updateUserById, deleteUserById, getUserById } from 'api/users';
 import { handleError } from 'api/handleError';
 import { keysLS } from 'shared/consts';
 import { signActions } from 'store/sign/sign.slice';
-import { IUserData, TUserCreate } from 'types/types';
+import { IUserData, TUserEdit } from 'types/types';
 import { getLSData } from 'utils/local-storage';
 import { userActions } from './user.slice';
+import { auth } from 'api/auth';
 
 export const updateUserThunk = createAsyncThunk(
   'updateUser',
-  async (userData: TUserCreate, { dispatch }) => {
+  async (newUserData: TUserEdit, { dispatch }) => {
     const { setLoading, setError } = signActions;
     const { setUpdatedUser } = userActions;
     dispatch(setError(''));
@@ -18,6 +19,20 @@ export const updateUserThunk = createAsyncThunk(
     try {
       const userId = getLSData<IUserData>(keysLS.userData)?.userId;
       if (!userId) return;
+
+      const currentUserData = (await getUserById({ userId })).data;
+
+      await auth({
+        login: currentUserData.login,
+        password: newUserData.password,
+      });
+
+      const userData = {
+        name: newUserData.name ? newUserData.name : currentUserData.name,
+        login: newUserData.login ? newUserData.login : currentUserData.login,
+        password: newUserData.newPassword ? newUserData.newPassword : newUserData.password,
+      };
+
       const response = await updateUserById({ userId, ...userData });
       dispatch(setUpdatedUser(response.data));
     } catch (error) {

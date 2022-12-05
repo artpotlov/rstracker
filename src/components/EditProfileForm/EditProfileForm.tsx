@@ -6,7 +6,7 @@ import { useEffect } from 'react';
 import { FormControlBase } from 'components/FormControlBase/FormControlBase';
 import { ControlInputBase } from 'components/ControlInputBase/ControlInputBase';
 import { useTranslation } from 'react-i18next';
-import { TUserCreate, IUserData } from 'types/types';
+import { TUserEdit, IUserData } from 'types/types';
 import { updateUserThunk, deleteUserThunk } from 'store/user/user.thunk';
 import { selectIsLoadingSign } from 'store/sign/sign.selectors';
 import { Portal } from 'components/Portal/Portal';
@@ -15,9 +15,10 @@ import { userActions } from 'store/user/user.slice';
 import { getLSData } from 'utils/local-storage';
 import { keysLS } from 'shared/consts';
 
-const defaultValuesForm: TUserCreate = {
+const defaultValuesForm: TUserEdit = {
   name: '',
   login: '',
+  newPassword: '',
   password: '',
 };
 
@@ -29,7 +30,7 @@ export const EditProfileForm = () => {
   const deletedUser = selectDeletedUser();
   const { setDeletedUser } = userActions;
 
-  const methodsForm = useForm<TUserCreate>({ defaultValues: defaultValuesForm });
+  const methodsForm = useForm<TUserEdit>({ defaultValues: defaultValuesForm });
 
   const {
     handleSubmit,
@@ -37,7 +38,7 @@ export const EditProfileForm = () => {
     reset,
   } = methodsForm;
 
-  const onSubmit = (data: TUserCreate) => {
+  const onSubmit = (data: TUserEdit) => {
     dispatch(updateUserThunk(data));
   };
 
@@ -69,7 +70,6 @@ export const EditProfileForm = () => {
           <FormControlBase label={t('forms.name')} errorMessage={errors.name?.message}>
             <ControlInputBase
               name="name"
-              rules={{ required: String(t('validateInput.required')) }}
               autoComplete="off"
               placeholder={t('forms.editNamePlaceholder')}
             />
@@ -77,9 +77,19 @@ export const EditProfileForm = () => {
           <FormControlBase label={t('forms.login')} errorMessage={errors.login?.message}>
             <ControlInputBase
               name="login"
-              rules={{ required: String(t('validateInput.required')) }}
               autoComplete="off"
               placeholder={t('forms.editLoginPlaceholder')}
+            />
+          </FormControlBase>
+          <FormControlBase
+            label={t('forms.newPassword')}
+            errorMessage={errors.newPassword?.message}
+          >
+            <ControlInputBase
+              name="newPassword"
+              autoComplete="off"
+              type="password"
+              placeholder={t('forms.editPasswordPlaceholder')}
             />
           </FormControlBase>
           <FormControlBase label={t('forms.password')} errorMessage={errors.password?.message}>
@@ -88,7 +98,7 @@ export const EditProfileForm = () => {
               rules={{ required: String(t('validateInput.required')) }}
               autoComplete="off"
               type="password"
-              placeholder={t('forms.editPasswordPlaceholder')}
+              placeholder={t('forms.passwordPlaceholder')}
             />
           </FormControlBase>
           <Flex columnGap={4} justify="space-between" flexWrap="wrap">
