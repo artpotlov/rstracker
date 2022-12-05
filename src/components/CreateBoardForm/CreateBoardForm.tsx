@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { Button, Box, ModalFooter, ModalBody } from '@chakra-ui/react';
+import { Box, Button, ModalBody, ModalFooter } from '@chakra-ui/react';
 import { FormProvider, useForm } from 'react-hook-form';
 import { useAppDispatch } from 'hooks/useAppDispatch';
 import { FormControlBase } from 'components/FormControlBase/FormControlBase';
@@ -10,6 +10,8 @@ import { createBoardThunk } from 'store/boards/boards.thunk';
 import { selectAllUsersOptions } from 'store/users/users.selectors';
 import { ControlSelectBase } from 'components/ControlSelectBase/ControlSelectBase';
 import { selectAuthUser } from 'store/user/user.selectors';
+import { useAppToast } from '../../hooks/useAppToast';
+import { boardsActions } from '../../store/boards/boards.slice';
 
 type TCreateBoardFormProps = {
   handleClose: () => void;
@@ -39,6 +41,8 @@ export const CreateBoardForm = ({ handleClose }: TCreateBoardFormProps) => {
   const createdBoard = selectCreatedBoard();
   const allUsersOptions = selectAllUsersOptions();
   const authUser = selectAuthUser();
+  const toast = useAppToast();
+  const { clearBoard } = boardsActions;
 
   const methodsForm = useForm<TValuesForm>({ defaultValues: defaultValuesForm });
 
@@ -57,8 +61,12 @@ export const CreateBoardForm = ({ handleClose }: TCreateBoardFormProps) => {
   useEffect(() => {
     if (createdBoard) {
       reset();
+      toast('success', '', t('boards.successRequest'));
     }
-  }, [createdBoard, reset]);
+    return () => {
+      dispatch(clearBoard());
+    };
+  }, [createdBoard, reset, t, toast, dispatch, clearBoard]);
 
   return (
     <FormProvider {...methodsForm}>

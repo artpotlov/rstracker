@@ -44,6 +44,9 @@ const boardsSlice = createSlice({
     deleteBoard: (state, { payload }: PayloadAction<TBoardSuccess>) => {
       state.allBoards = state.allBoards.filter((board) => board._id !== payload._id);
     },
+    clearBoard: (state) => {
+      state.createdBoard = null;
+    },
   },
 });
 

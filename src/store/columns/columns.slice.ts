@@ -52,6 +52,9 @@ const columnsSlice = createSlice({
     deleteColumn: (state, { payload }: PayloadAction<TColumnSuccess>) => {
       state.allColumns = state.allColumns.filter((column) => column._id !== payload._id);
     },
+    clearColumn: (state) => {
+      state.createdColumn = null;
+    },
   },
 });
 
