@@ -24,9 +24,12 @@ import { ReactComponent as AvatarTonKristall } from 'assets/images/welcome/tonKr
 import { ReactComponent as AvatarSlava } from 'assets/images/welcome/slava.svg';
 import { useTranslation } from 'react-i18next';
 import { PersonCard } from '../components/PersonCard/PersonCard';
+import { selectAuthUser } from '../store/user/user.selectors';
 
 export const WelcomePage = () => {
   const { t } = useTranslation('translation', { keyPrefix: 'welcome' });
+  const authUser = selectAuthUser();
+
   return (
     <Container mt="50px" mb="50px" maxW="5xl" color="gray.700" centerContent>
       <Box as="section">
@@ -40,7 +43,10 @@ export const WelcomePage = () => {
             alt="RS Tracker"
           />
           <Flex justifyContent="center" gap={4}>
-            <Link href={pathRoutes.boards} _hover={{ textDecoration: 'none' }}>
+            <Link
+              href={authUser ? pathRoutes.boards : pathRoutes.sign}
+              _hover={{ textDecoration: 'none' }}
+            >
               <Button colorScheme="green" size="lg">
                 {t('sectionOne.buttonStart')}
               </Button>

@@ -1,7 +1,7 @@
 {
   "header": {
     "boards": "Boards",
-    "auth": "Sign in/up",
+    "auth": "Sign in / up",
     "edit": "Edit",
     "logout": "Log out",
     "search": "Search"
