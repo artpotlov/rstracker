@@ -123,6 +123,7 @@ export const KanbanColumns = () => {
         <Droppable droppableId="all-columns" direction="horizontal" type={DRAGGABLE_TYPES.column}>
           {(provided) => (
             <Flex
+              width="fit-content"
               height="100%"
               maxH="100%"
               gap="4"
