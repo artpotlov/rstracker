@@ -58,7 +58,7 @@ export const CreateTaskForm = ({ columnId, handleClose }: TCreateBoardFormProps)
 
   const onSubmit = (data: TValuesForm) => {
     if (!authUser || !board) return;
-    const userId = authUser.userId;
+    const userId = authUser.login;
     const boardId = board._id;
     const users = data.users.map((user) => user.value);
     dispatch(createTaskThunk({ ...data, users, userId, order: orderNewTask, boardId, columnId }));

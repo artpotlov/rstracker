@@ -1,5 +1,5 @@
 import { Stack } from '@chakra-ui/react';
-import { TaskItem } from 'components/TasksItem/TaskItem';
+import { TaskItem } from 'components/TaskItem/TaskItem';
 import { selectTaskColumn } from 'store/tasks/tasks.selectors';
 import { Droppable } from '@hello-pangea/dnd';
 import { DRAGGABLE_TYPES } from 'shared/consts';

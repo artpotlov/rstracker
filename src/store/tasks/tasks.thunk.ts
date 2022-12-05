@@ -1,6 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { handleError } from 'api/handleError';
-import { createNewTask, getTasksByBoardId, updateSetOfTasks } from 'api/tasks';
+import { createNewTask, deleteTaskById, getTasksByBoardId, updateSetOfTasks } from 'api/tasks';
 import { TRootState } from 'store/store';
 import { TTasksRequest, TTasksSuccess } from 'types/types';
 import { sortArrayByOrder } from 'utils/sortArrayByOrder';
@@ -68,6 +68,25 @@ export const moveTaskThunk = createAsyncThunk<unknown, TTasksSuccess[], { state:
       const errorMessage = handleError(error).message;
       dispatch(setError(errorMessage));
       dispatch(setAllTasksBoard(oldTasks));
+    } finally {
+      dispatch(setUploading(false));
+    }
+  }
+);
+
+export const deleteTaskThunk = createAsyncThunk(
+  'deleteTask',
+  async (sendData: Pick<TTasksRequest, 'boardId' | 'columnId' | 'taskId'>, { dispatch }) => {
+    const { setUploading, setError, setDeletedTask, deleteTask } = tasksActions;
+    dispatch(setError(''));
+    dispatch(setUploading(true));
+    try {
+      const { data } = await deleteTaskById(sendData);
+      dispatch(deleteTask(data));
+      dispatch(setDeletedTask(null));
+    } catch (error) {
+      const errorMessage = handleError(error).message;
+      dispatch(setError(errorMessage));
     } finally {
       dispatch(setUploading(false));
     }
