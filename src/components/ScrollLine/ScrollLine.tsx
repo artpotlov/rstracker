@@ -18,7 +18,6 @@ export const ScrollLine = () => {
         transformOrigin={0}
         zIndex={999}
       />
-      ;
     </Box>
   );
 };

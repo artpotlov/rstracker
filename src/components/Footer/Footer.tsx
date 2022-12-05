@@ -7,6 +7,7 @@ import { pathRoutes } from '../../router/router';
 
 export const Footer = () => {
   const { t } = useTranslation('translation', { keyPrefix: 'footer' });
+
   return (
     <>
       <Divider />

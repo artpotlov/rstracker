@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { Box, Button, Flex } from '@chakra-ui/react';
+import { Box, Button, Flex, Text } from '@chakra-ui/react';
 import { useTranslation } from 'react-i18next';
 import { pathRoutes } from 'router/router';
 import { selectBoard } from 'store/columns/columns.selectors';
@@ -7,6 +7,7 @@ import { TitlePage } from 'components/TitilePage/TitlePage';
 import { CreateColumnForm } from 'components/CreateColumnForm/CreateColumnForm';
 import { Portal } from 'components/Portal/Portal';
 import { useState } from 'react';
+import { Add, ArrowLeft } from '@carbon/icons-react';
 
 export const KanbanHeader = () => {
   const { t } = useTranslation();
@@ -28,11 +29,13 @@ export const KanbanHeader = () => {
         <Flex alignItems="center" justifyContent="space-between" gap={4}>
           <Link to={`/${pathRoutes.boards}`}>
             <Button colorScheme="blue" size="sm">
-              {t('columns.back')}
+              <ArrowLeft size={16} />
+              <Text pl={2}>{t('columns.back')}</Text>
             </Button>
           </Link>
           <Button colorScheme="blue" size="sm" onClick={handleTogglePortal}>
-            {t('columns.create')}
+            <Text pr={2}>{t('columns.create')}</Text>
+            <Add size={16} />
           </Button>
         </Flex>
         <Flex gap={4}></Flex>

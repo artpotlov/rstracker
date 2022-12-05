@@ -7,8 +7,9 @@ export const DraggableLine = (props: DraggableProvided) => {
       mb={1}
       h="3"
       minH="3"
-      backgroundColor="blue.500"
-      borderRadius="md"
+      bgGradient="linear(to-r, blue.200, blue.400)"
+      borderTopLeftRadius="md"
+      borderTopRightRadius="md"
       position="relative"
       cursor="grab"
       _before={{

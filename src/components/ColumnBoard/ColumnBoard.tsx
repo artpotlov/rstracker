@@ -1,4 +1,4 @@
-import { GroupObjectsNew, TrashCan } from '@carbon/icons-react';
+import { AddAlt, TrashCan } from '@carbon/icons-react';
 import {
   Box,
   Button,
@@ -50,7 +50,8 @@ export const ColumnBoard = ({ column, index }: TColumnBoardProps) => {
             w="288px"
             minW="288px"
             maxH="100%"
-            backgroundColor="gray.100"
+            backgroundColor="gray.200"
+            shadow="md"
             {...provided.draggableProps}
             ref={provided.innerRef}
           >
@@ -88,13 +89,14 @@ export const ColumnBoard = ({ column, index }: TColumnBoardProps) => {
             <CardFooter p={2}>
               <Button
                 variant="ghost"
-                p={0}
+                w="100%"
                 h="auto"
+                p={0}
                 color="gray.500"
                 _hover={{ color: 'blue.500' }}
                 onClick={toggleCreateCard}
               >
-                <GroupObjectsNew size="24" />
+                <AddAlt size={24} />
                 <Text pl={2}>Добавить задачу</Text>
               </Button>
             </CardFooter>
