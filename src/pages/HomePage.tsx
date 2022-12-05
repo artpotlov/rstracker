@@ -9,6 +9,7 @@ import { useTranslation } from 'react-i18next';
 import { useAppToast } from 'hooks/useAppToast';
 import { selectErrorBoards } from 'store/boards/boards.selectors';
 import { boardsActions } from 'store/boards/boards.slice';
+import { selectAuthUser } from 'store/user/user.selectors';
 
 export const HomePage = () => {
   const dispatch = useAppDispatch();
@@ -16,10 +17,13 @@ export const HomePage = () => {
   const toast = useAppToast();
   const errorBoards = selectErrorBoards();
   const { setError } = boardsActions;
+  const userData = selectAuthUser();
 
   useEffect(() => {
-    dispatch(getAllBoardsThunk());
-  }, [dispatch]);
+    if (userData) {
+      dispatch(getAllBoardsThunk());
+    }
+  }, [dispatch, userData]);
 
   useEffect(() => {
     if (errorBoards) {

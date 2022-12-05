@@ -15,6 +15,7 @@ import { boardsActions } from 'store/boards/boards.slice';
 import { columnsActions } from 'store/columns/columns.slice';
 import { tasksActions } from 'store/tasks/tasks.slice';
 import { getAllTasksBoardThunk } from 'store/tasks/tasks.thunk';
+import { selectAuthUser } from 'store/user/user.selectors';
 
 export const BoardPage = () => {
   const dispatch = useAppDispatch();
@@ -24,13 +25,14 @@ export const BoardPage = () => {
   const errorBoards = selectErrorBoards();
   const errorColumns = selectErrorColumns();
   const errorTasks = selectErrorTasks();
+  const userData = selectAuthUser();
 
   useEffect(() => {
-    if (id) {
+    if (id && userData) {
       dispatch(getAllColumnsThunk(id));
       dispatch(getAllTasksBoardThunk(id));
     }
-  }, [id, dispatch]);
+  }, [id, dispatch, userData]);
 
   useEffect(() => {
     if (errorBoards) {
