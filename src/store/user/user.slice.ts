@@ -1,8 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { IUserData } from 'types/types';
+import { IUserData, TUserSuccess } from 'types/types';
 import { deleteLSData, getLSData } from 'utils/local-storage';
 import { keysLS } from 'shared/consts';
-import { TUserSuccess } from 'types/types';
 
 type TAuthUser = IUserData | null;
 
@@ -42,6 +41,9 @@ const userSlice = createSlice({
     },
     setDeletedUser: (state, { payload }: PayloadAction<TDeletedUser>) => {
       state.deletedUser = payload;
+    },
+    clearUser: (state) => {
+      state.updatedUser = null;
     },
   },
 });

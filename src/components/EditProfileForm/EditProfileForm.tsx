@@ -1,19 +1,20 @@
-import { Button, Box, Flex } from '@chakra-ui/react';
+import { Box, Button, Flex } from '@chakra-ui/react';
 import { FormProvider, useForm } from 'react-hook-form';
-import { selectUpdatedUser, selectDeletedUser } from 'store/user/user.selectors';
+import { selectDeletedUser, selectUpdatedUser } from 'store/user/user.selectors';
 import { useAppDispatch } from 'hooks/useAppDispatch';
 import { useEffect } from 'react';
 import { FormControlBase } from 'components/FormControlBase/FormControlBase';
 import { ControlInputBase } from 'components/ControlInputBase/ControlInputBase';
 import { useTranslation } from 'react-i18next';
-import { TUserEdit, IUserData } from 'types/types';
-import { updateUserThunk, deleteUserThunk } from 'store/user/user.thunk';
+import { IUserData, TUserEdit } from 'types/types';
+import { deleteUserThunk, updateUserThunk } from 'store/user/user.thunk';
 import { selectIsLoadingSign } from 'store/sign/sign.selectors';
 import { Portal } from 'components/Portal/Portal';
 import { ConfirmModal } from 'components/ConfirmModal/ConfirmModal';
 import { userActions } from 'store/user/user.slice';
 import { getLSData } from 'utils/local-storage';
 import { keysLS } from 'shared/consts';
+import { useAppToast } from '../../hooks/useAppToast';
 
 const defaultValuesForm: TUserEdit = {
   name: '',
@@ -28,7 +29,8 @@ export const EditProfileForm = () => {
   const isLoading = selectIsLoadingSign();
   const updatedUser = selectUpdatedUser();
   const deletedUser = selectDeletedUser();
-  const { setDeletedUser } = userActions;
+  const { setDeletedUser, clearUser } = userActions;
+  const toast = useAppToast();
 
   const methodsForm = useForm<TUserEdit>({ defaultValues: defaultValuesForm });
 
@@ -60,8 +62,13 @@ export const EditProfileForm = () => {
   useEffect(() => {
     if (updatedUser) {
       reset();
+      toast('success', '', t('user.successRequest'));
     }
-  }, [updatedUser, reset]);
+
+    return () => {
+      dispatch(clearUser());
+    };
+  }, [updatedUser, reset, t, toast, dispatch, clearUser]);
 
   return (
     <>
