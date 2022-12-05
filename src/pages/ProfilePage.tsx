@@ -8,8 +8,8 @@ export const ProfilePage = () => {
 
   return (
     <PageGuard>
-      <Container pt="50px" ml={{ base: 'auto', md: '10%' }}>
-        <Box maxW="500px" p="26px" boxShadow="md" rounded="md">
+      <Container mt="50px" mb="50px" display="flex" justifyContent="center" alignItems="center">
+        <Box w="100%" maxW="500px" px="10px" boxShadow="md" rounded="md">
           <Tabs variant="enclosed-colored">
             <TabList>
               <Tab fontWeight="medium">{t('forms.edit')}</Tab>

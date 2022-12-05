@@ -51,10 +51,6 @@ export const Header = () => {
     });
   }, [scrollY]);
 
-  /* const handleEdit = () => {
-    navigate(pathRoutes.profile);
-  }; */
-
   return (
     <>
       <Flex
